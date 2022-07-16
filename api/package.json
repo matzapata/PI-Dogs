@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
+    "test": "mocha -w ./tests/**/*.spec.js",
+    "build": "cd ../client && npm run build && cd ../api",
+    "syncDb": "node ./utils/syncDb.js"
   },
   "author": "Henry",
   "license": "ISC",
