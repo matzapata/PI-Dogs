@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon -L",
-    "build": "cd ../client && npm run build && cd ../api",
     "test": "mocha -w ./tests/**/*.spec.js"
   },
   "author": "Henry",
