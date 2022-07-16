@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "![HenryLogo](https://d31uz8lwfmyn8g.cloudfront.net/Assets/logo-henry-white-lg.png)",
   "scripts": {
+<<<<<<< HEAD
     "build": "cd client && npm install && npm run build && cd ../api && npm install",
+=======
+    "build": "cd client && npm install && npm run build && cd ../server && npm install",
+>>>>>>> 9b23ab72bcd1e6b3171276010ef225ab63e7b838
     "start": "cd api && npm start"
   },
   "repository": {
