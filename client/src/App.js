@@ -1,9 +1,16 @@
-import './App.css';
+import { Route } from "react-router-dom";
+import Landing from './components/pages/Landing'
+import Home from './components/pages/Home'
+import NewBreed from './components/pages/NewBreed'
+import BreedDetail from './components/pages/BreedDetail'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Dogs</h1>
+    <div>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/home" component={Home} />
+      <Route exact path="/new-breed" component={NewBreed} />
+      <Route exact path="/:id" component={BreedDetail} />
     </div>
   );
 }
