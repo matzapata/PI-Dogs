@@ -1,5 +1,5 @@
-require('dotenv').config()
 const axios = require('axios');
+require('dotenv').config({ path: '../.env' })
 
 async function getBreeds() {
     const res = await axios({
