@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     lifespan: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING, // String para usar un rango. EJ: "12 - 16 years" 
       allowNull: false,
     }
   }, 

@@ -25,14 +25,11 @@ const port = process.env.PORT || 3000; // Railways inyecta el PORT automaticamen
 
 if (process.env.NODE_ENV === 'dev') {
   // Syncing all the models at once.
-  conn.sync({ force: true }).then(() => {
-    server.listen(port, () => {
-      console.log(`listening at ${port}`); // eslint-disable-line no-console
-    });
+  conn.sync({ force: true }).then(async () => {
+    await require('./utils/populateTemperaments')(); // Populate temperaments db
+    server.listen(port, () => { console.log(`listening at ${port}`); });
   });
 } else {
-  // En produccion sincronizamos manualmente por seguridad.
-  server.listen(port, () => {
-    console.log(`listening at ${port}`); // eslint-disable-line no-console
-  });
+  // En produccion evitamos forzar la sync
+  server.listen(port, () => { console.log(`listening at ${port}`); });
 }

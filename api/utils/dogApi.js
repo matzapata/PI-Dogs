@@ -13,10 +13,10 @@ async function getBreeds() {
     return res.data;
 }
 
-async function getBreedDetail(id) {
+async function searchBreeds(name) {
     const res = await axios({
         method: 'get',
-        url: `https://api.thedogapi.com/v1/breeds/search?q=${id}`,
+        url: `https://api.thedogapi.com/v1/breeds/search?q=${name}`,
         headers: {
             'Content-Type': 'application/json',
             "x-api-key": process.env.DOG_API_KEY
@@ -26,6 +26,6 @@ async function getBreedDetail(id) {
 }
 
 module.exports = {
-    getBreedDetail,
+    searchBreeds,
     getBreeds
 };
