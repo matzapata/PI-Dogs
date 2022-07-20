@@ -6,12 +6,12 @@ import BreedDetail from './components/pages/BreedDetail'
 
 function App() {
   return (
-    <div>
+    <>
       <Route exact path="/" component={Landing} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/new-breed" component={NewBreed} />
       <Route exact path="/:id" component={BreedDetail} />
-    </div>
+    </>
   );
 }
 
