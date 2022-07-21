@@ -21,7 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 require('dotenv').config();
 
-const port = process.env.PORT || 3000; // Railways inyecta el PORT automaticamente 
+const port = process.env.PORT || 3001; // Railways inyecta el PORT automaticamente 
 
 if (process.env.NODE_ENV === 'dev') {
   // Syncing all the models at once.
