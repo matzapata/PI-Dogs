@@ -2,12 +2,9 @@ import {
     SET_DOGS,
     SET_DOG_DETAIL,
     SET_TEMPERAMENTS,
-    ORDER_DOGS_AZ,
-    ORDER_DOGS_ZA,
-    ORDER_DOGS_HL,
-    ORDER_DOGS_LH,
     NEXT_PAGE,
     PREV_PAGE,
+    SORT_DOGS,
 } from "../actions/constants";
 
 const initialState = {
@@ -89,10 +86,27 @@ const rootReducer = (state = initialState, action) => {
                     pageContent: state.dogs.slice(
                         (state.pagination.current - 2) * state.pagination.pageSize
                         ,
-                        (state.pagination.current -1) * state.pagination.pageSize
+                        (state.pagination.current - 1) * state.pagination.pageSize
                     )
                 }
             };
+        case SORT_DOGS: {
+            const sortedDogs = [...state.dogs];
+            sortedDogs.sort(action.payload);
+
+            return {
+                ...state,
+                dogs: sortedDogs,
+                pagination: {
+                    next: (state.pagination.total === 1) ? null : 2,
+                    prev: null,
+                    current: 1,
+                    total: state.pagination.total,
+                    pageSize: state.pagination.pageSize,
+                    pageContent: sortedDogs.slice(0, state.pagination.pageSize)
+                }
+            };
+        }
         default:
             return { ...state };
     }

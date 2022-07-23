@@ -1,0 +1,11 @@
+
+.breedsContainer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.searchContainer {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: flex;
+}

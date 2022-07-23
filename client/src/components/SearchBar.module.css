@@ -1,0 +1,15 @@
+
+.searchForm {
+    display: flex;
+    margin-right: 1rem;
+}
+
+.formInput {
+    composes: formInput from "../styles/Components.module.css";
+    margin-right: 0.25rem;
+    width: 100%;     
+}
+
+.btnSm {
+    composes: btnSm from "../styles/Components.module.css";
+}

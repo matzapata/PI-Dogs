@@ -1,0 +1,36 @@
+
+.container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.iconContainer {
+    background-color: var(--blue-100);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--rounded-full);
+    height: 40px;
+    width: 40px;
+}
+
+.iconContainer svg {
+    height: 20px;
+    color: var(--blue-800);
+}
+
+.dataContainer {
+    margin-left: 0.8rem;
+}
+
+.dataContainer h2 {
+    font-size: var(--font-md);
+    line-height: var(--line-md);
+    color: var(--gray-900);
+}
+
+.dataContainer p {
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+    color: var(--gray-900);
+}

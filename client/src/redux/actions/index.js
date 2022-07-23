@@ -4,6 +4,7 @@ import {
     SET_DOGS,
     SET_DOG_DETAIL,
     SET_TEMPERAMENTS,
+    SORT_DOGS,
 } from "./constants";
 import axios from "axios";
 
@@ -67,12 +68,67 @@ export function fetchDogDetail(dogId) {
 export function nextPage() {
     return {
         type: NEXT_PAGE
-    }
+    };
 }
 
 export function prevPage() {
     return {
         type: PREV_PAGE
-    }
+    };
 }
 
+export function sortDogsAZ() {
+    return {
+        type: SORT_DOGS,
+        payload: function (a, b) {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        }
+    };
+}
+
+export function sortDogsZA() {
+    return {
+        type: SORT_DOGS,
+        payload: function (a, b) {
+            if (a.name < b.name) { return 1; }
+            if (a.name > b.name) { return -1; }
+            return 0;
+        }
+    };
+}
+
+export function sortDogsWeightHL() {
+    return {
+        type: SORT_DOGS,
+        payload: function (a, b) {
+            const aWeights = a.weight.replace(/\s/g, '').split('-')
+            const aHWeight = (aWeights.length === 1)? parseInt(a.weight) : parseInt(aWeights[1]); 
+            
+            const bWeights = b.weight.replace(/\s/g, '').split('-')
+            const bHWeight = (bWeights.length === 1)? parseInt(b.weight) : parseInt(bWeights[1]); 
+            
+            if (aHWeight < bHWeight) { return 1; }
+            if (aHWeight > bHWeight) { return -1; }
+            return 0;
+        }
+    };
+}
+
+export function sortDogsWeightLH() {
+    return {
+        type: SORT_DOGS,
+        payload: function (a, b) {
+            const aWeights = a.weight.replace(/\s/g, '').split('-')
+            const aHWeight = (aWeights.length === 1)? parseInt(a.weight) : parseInt(aWeights[1]); 
+            
+            const bWeights = b.weight.replace(/\s/g, '').split('-')
+            const bHWeight = (bWeights.length === 1)? parseInt(b.weight) : parseInt(bWeights[1]); 
+            
+            if (aHWeight < bHWeight) { return -1; }
+            if (aHWeight > bHWeight) { return 1; }
+            return 0;
+        }
+    };
+}
