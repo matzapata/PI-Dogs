@@ -9,7 +9,7 @@ async function populateTemperament() {
     // Extraemos los temperamentos de los atributos del las razas.
     breeds.forEach(breed => {
         if (breed.temperament !== undefined) {
-            const temperament = breed.temperament.replace(/\s/g, '');;
+            const temperament = breed.temperament.replace(/\s/g, '');
             temperament.split(',').forEach(t => temperaments.add(t));
         }
     });

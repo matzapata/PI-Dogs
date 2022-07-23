@@ -1,5 +1,5 @@
 const axios = require('axios');
-require('dotenv').config({ path: '../.env' })
+require('dotenv').config({ path: '../.env' });
 
 async function getBreeds() {
     const res = await axios({
@@ -22,7 +22,17 @@ async function searchBreeds(name) {
             "x-api-key": process.env.DOG_API_KEY
         }
     });
-    return res.data;
+
+    // Add images URL
+    const breeds = await getBreeds()
+    const response = res.data.map((r) => {
+        const breed = breeds.find(b => b.id === r.id)
+        if (breed) r.image = breed.image
+
+        return r
+    })
+
+    return response;
 }
 
 module.exports = {
