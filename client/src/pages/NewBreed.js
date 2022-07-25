@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BackButton from "../components/BackButton";
@@ -8,12 +8,13 @@ import sComponents from "../styles/Components.module.css";
 import s from "./NewBreed.module.css";
 import CloseIcon from "../components/Icons/Close";
 import { Link } from "react-router-dom";
+import { dogApiCreateNewDog } from "../utils/apiDogs";
 
 export default function NewBreed() {
     const dispatch = useDispatch();
     const temperaments = useSelector(state => state.temperaments);
     const [isValid, setIsValid] = useState(false);
-    const [newDog, setNewDog] = useState(null)
+    const [newDog, setNewDog] = useState(null);
     const [state, setState] = useState({
         name: '',
         minHeight: 0,
@@ -37,26 +38,18 @@ export default function NewBreed() {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const data = {
-            name: state.name,
-            height: `${state.minHeight} - ${state.maxHeight}`,
-            weight: `${state.minWeight} - ${state.maxWeight}`,
-            lifespan: `${state.minLifespan} - ${state.maxLifespan}`,
-            temperamentIds: state.temperaments.map(t => t.id)
-        };
 
-        const res = await axios({
-            method: 'post',
-            url: `${process.env.REACT_APP_API_DOMAIN}/api/dogs`,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify(data)
-        });
+        const res = await dogApiCreateNewDog(
+            state.name,
+            `${state.minHeight} - ${state.maxHeight}`,
+            `${state.minWeight} - ${state.maxWeight}`,
+            `${state.minLifespan} - ${state.maxLifespan}`,
+            state.temperaments.map(t => t.id)
+        );
 
-        setNewDog(res.data)
+        setNewDog(res.data);
 
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0);
 
         setState({
             name: '',
@@ -104,24 +97,24 @@ export default function NewBreed() {
         if (state.name === '') errorMsgs.name = 'Name is required';
         else if (/[^a-zA-Z]/.test(state.name.replace(/\s/g, ''))) errorMsgs.name = 'Name can only contain alphabet chars';
         else errorMsgs.name = '';
-        
-        if (state.minHeight <= 0) errorMsgs.minHeight = 'Min height must be greater than 0'; 
+
+        if (state.minHeight <= 0) errorMsgs.minHeight = 'Min height must be greater than 0';
         else errorMsgs.minHeight = '';
-        
+
         if (state.maxHeight <= 0) errorMsgs.maxHeight = 'Max height must be greater than 0';
         else if (state.maxHeight <= state.minHeight) errorMsgs.maxHeight = 'Max height must be greater than min height';
         else errorMsgs.maxHeight = '';
-        
+
         if (state.minWeight <= 0) errorMsgs.minWeight = 'Min weight must be greater than 0';
         else errorMsgs.minWeight = '';
-        
+
         if (state.maxWeight <= 0) errorMsgs.maxWeight = 'Max weight must be greater than 0';
         else if (state.maxWeight <= state.minWeight) errorMsgs.maxWeight = 'Max weight must be greater than min weight';
         else errorMsgs.maxWeight = '';
 
         if (state.minLifespan <= 0) errorMsgs.minLifespan = 'Min lifespan must be greater than 0';
         else errorMsgs.minLifespan = '';
-        
+
         if (state.maxLifespan <= 0) errorMsgs.maxLifespan = 'Max lifespan must be greater than 0';
         else if (state.maxLifespan <= state.minLifespan) errorMsgs.maxLifespan = 'Max lifespan must be greater than min lifespan';
         else errorMsgs.maxLifespan = '';
@@ -148,7 +141,7 @@ export default function NewBreed() {
                 <h1 className={s.header}>Create a new breed</h1>
                 {newDog !== null &&
                     <div className={s.successMsg}>
-                        <span>Successfully created new breed </span> 
+                        <span>Successfully created new breed </span>
                         <Link to={`/breeds/${newDog.id}`}>{newDog.name}</Link>
                     </div>
                 }

@@ -10,7 +10,7 @@ import {
     SET_PAGE,
     SET_SEARCH,
 } from "./constants";
-import axios from "axios";
+import { dogApiGetAllDogs, dogApiGetDogByName, dogApiGetDogDetails, dogApiGetDogTemperaments } from "../../utils/apiDogs";
 
 export function setDogs(dogs) {
     return {
@@ -43,7 +43,7 @@ export function setTemperaments(temperaments) {
 
 export function fetchAllDogs() {
     return async function (dispatch) {
-        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs`);
+        const res = await dogApiGetAllDogs();
         dispatch(setSearch("All"));
         dispatch(setDogs(res.data));
     };
@@ -51,7 +51,7 @@ export function fetchAllDogs() {
 
 export function fetchDogsName(name) {
     return async function (dispatch) {
-        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs?name=${name}`);
+        const res = await dogApiGetDogByName(name);
         dispatch(setSearch(name));
         dispatch(setDogs(res.data));
     };
@@ -59,7 +59,7 @@ export function fetchDogsName(name) {
 
 export function fetchTemperaments() {
     return async function (dispatch) {
-        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/temperaments`);
+        const res = await dogApiGetDogTemperaments();
         dispatch(setTemperaments(res.data.sort(function (a, b) {
             if (a.name < b.name) { return -1; }
             if (a.name > b.name) { return 1; }
@@ -71,7 +71,7 @@ export function fetchTemperaments() {
 export function fetchDogDetail(dogId) {
     return async function (dispatch) {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs/${dogId}`);
+            const response = await dogApiGetDogDetails(dogId);
             dispatch(setDogDetail(response.data));
         } catch (e) {
             dispatch(setDogDetail({
