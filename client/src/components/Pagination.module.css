@@ -31,6 +31,10 @@
     align-items: center;
 }
 
+.pagination div button.numBtn {
+    display: none;
+}
+
 
 
 .pagination div button span {
@@ -60,4 +64,11 @@
 .pagination div button.active {
     background-color: var(--gray-100);
     color: var(--blue-700);
+}
+
+
+@media (min-width: 800px) {
+    .pagination div button.numBtn {
+        display: inline-flex;
+    }
 }

@@ -5,7 +5,7 @@ import ArrowNarrowRight from "../components/Icons/ArrowNarrowRight";
 
 export default function Landing() {
     return (
-        <div style={{ height: "100vh", padding: "1rem" }}>
+        <div style={{ height: "100vh", padding: "0.7rem" }}>
             <div className={s.container} style={{ backgroundImage: `url(${background})` }}>
                 <div className={s.header}>
                     <h1 className={s.title}>Dogs</h1>

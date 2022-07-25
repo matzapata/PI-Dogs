@@ -23,7 +23,7 @@ export default function BreedDetail() {
 
     return (
         <div className={s.container}>
-            <div style={{ margin: "2rem 0" }}>
+            <div className={s.backBtnContainer}>
                 <BackButton />
             </div>
             <div className={s.dogDetailContainer}>

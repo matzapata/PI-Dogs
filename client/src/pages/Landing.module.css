@@ -1,25 +1,24 @@
-
 .container {
     background-size: cover;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    border-radius: 0.8rem;
+    border-radius: var(--rounded-md);
     width: 100%;
     height: 100%;
-    padding: 4rem;
+    padding: 1rem;
     position: relative;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.7);
 }
 
 .header {
     position: absolute;
-    bottom: 4rem;
-    left: 4rem;
+    bottom: 2rem;
+    left: 1rem;
 }
 
 .title {
-    font-size: 5rem;
+    font-size: 3rem;
     color: white;
     margin: 0;
 }
@@ -29,7 +28,8 @@
     align-items: center;
     text-decoration: none;
     color: white;
-    font-size: 1.5rem;
+    font-size: var(--font-base);
+    line-height: var(--line-base);
 }
 
 .exploreLink:hover {
@@ -38,4 +38,25 @@
 
 .exploreLink span {
     margin-right: 0.5rem;
+}
+
+
+@media (min-width: 800px) {
+    /* md on */
+
+    .title {
+        font-size: var(--font-7xl);
+        line-height: var(--font-7xl);
+        margin-bottom: 1.5rem;
+    }
+
+    .header {
+        bottom: 4rem;
+        left: 4rem;
+    }
+
+    .exploreLink {
+        font-size: var(--font-lg);
+        line-height: var(--line-lg);
+    }
 }

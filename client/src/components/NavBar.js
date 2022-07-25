@@ -19,7 +19,9 @@ export default function NavBar() {
                         </li>
                     </ul>
                 </div>
+                <div>
                     <SearchBar />
+                </div>
             </div>
         </nav>
     );

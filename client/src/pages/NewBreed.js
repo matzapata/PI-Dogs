@@ -6,12 +6,14 @@ import { fetchTemperaments } from "../redux/actions";
 
 import sComponents from "../styles/Components.module.css";
 import s from "./NewBreed.module.css";
-import CloseIcon from "../components/Icons/Close"
+import CloseIcon from "../components/Icons/Close";
+import { Link } from "react-router-dom";
 
 export default function NewBreed() {
     const dispatch = useDispatch();
     const temperaments = useSelector(state => state.temperaments);
     const [isValid, setIsValid] = useState(false);
+    const [newDog, setNewDog] = useState(null)
     const [state, setState] = useState({
         name: '',
         minHeight: 0,
@@ -43,7 +45,7 @@ export default function NewBreed() {
             temperamentIds: state.temperaments.map(t => t.id)
         };
 
-        await axios({
+        const res = await axios({
             method: 'post',
             url: `${process.env.REACT_APP_API_DOMAIN}/api/dogs`,
             headers: {
@@ -51,6 +53,10 @@ export default function NewBreed() {
             },
             data: JSON.stringify(data)
         });
+
+        setNewDog(res.data)
+
+        window.scrollTo(0, 0)
 
         setState({
             name: '',
@@ -124,12 +130,18 @@ export default function NewBreed() {
     }, []);
 
     return (
-        <div>
-            <div style={{ maxWidth: "800px", margin: "1rem auto" }}>
+        <div className={s.container}>
+            <div className={s.backBtnContainer}>
                 <BackButton />
             </div>
-            <form onSubmit={onSubmit} className={s.container}>
+            <form onSubmit={onSubmit} className={s.formContainer}>
                 <h1 className={s.header}>Create a new breed</h1>
+                {newDog !== null &&
+                    <div className={s.successMsg}>
+                        <span>Successfully created new breed </span> 
+                        <Link to={`/breeds/${newDog.id}`}>{newDog.name}</Link>
+                    </div>
+                }
                 <div>
                     <label className={sComponents.formLabel}>Name</label>
                     <input className={sComponents.formInput} value={state.name} onChange={onChange} type="text" name="name" placeholder="Breed name" />
@@ -176,7 +188,7 @@ export default function NewBreed() {
                     <select className={sComponents.select} name="addTemperament" onChange={onChange}>
                         {temperaments?.map((t, i) => <option value={t.id} key={i}>{t.name}</option>)}
                     </select>
-                    <button className={sComponents.btnSm} style={{marginLeft: "0.5rem"}} type="button" onClick={() => addTemperament()}>Add</button>
+                    <button className={sComponents.btnSm} style={{ marginLeft: "0.5rem" }} type="button" onClick={() => addTemperament()}>Add</button>
                     <ul className={s.temperamentsList}>
                         {state.temperaments.map((t, i) =>
                             <li key={i} className={s.temperament}>

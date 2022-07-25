@@ -43,7 +43,7 @@ export default function Pagination() {
                         <button
                             key={p}
                             disabled={pagination.current === p}
-                            className={`${pagination.current === p && s.active}`}
+                            className={`${pagination.current === p && s.active} ${s.numBtn}`}
                             onClick={() => {
                                 dispatch(setPage(p));
                                 window.scrollTo(0, 0);

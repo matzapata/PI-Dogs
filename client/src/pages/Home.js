@@ -34,7 +34,7 @@ export default function Home() {
             {pagination.pageContent.length === 0 ?
                 <NotFound />
                 :
-                <ul>
+                <ul className={s.cardsContainer}>
                     {pagination.pageContent.map((d, i) => <BreedCard key={i} breed={d} />)}
                 </ul>
             }

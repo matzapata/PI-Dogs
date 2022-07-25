@@ -45,6 +45,18 @@ html {
     --line-lg: 1.75rem;
     --font-xl: 1.25rem;
     --line-xl: 1.75rem;
+    --font-2xl: 1.5rem;
+    --line-2xl: 2rem;
+    --font-3xl: 1.875rem;
+    --line-3xl: 2.25rem;
+    --font-4xl: 2.25rem;
+    --line-4xl: 2.5rem;
+    --font-5xl: 3rem;
+    --line-5xl: 1;
+    --font-6xl: 3.75rem;
+    --line-6xl: 1;
+    --font-7xl: 4.5rem;
+    --line-7xl: 1;
 
     /* Borders */
     --rounded-sm: 0.125rem;

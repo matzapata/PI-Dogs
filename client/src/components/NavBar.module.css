@@ -6,6 +6,7 @@
 
 .innerContainer {
     display:  flex;
+    flex-direction: column;
     padding: 1rem;
     justify-content: space-between;
     align-items: center;
@@ -13,9 +14,15 @@
     margin: 0 auto;
 }
 
+.innerContainer > div:last-child {
+    width: 100%;
+}
+
 .leftContainer {
     display: flex;
     align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
 .navItems {
@@ -26,11 +33,21 @@
 }
 
 .navItems li {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
 }
 
 .navItems li a {
     text-decoration: none;
     color: var(--gray-600);
     font-weight: 500;
+}
+
+@media (min-width: 800px) {
+    .innerContainer {
+        flex-direction: row;
+    }
+
+    .leftContainer {
+        margin-bottom: 0;
+    }
 }

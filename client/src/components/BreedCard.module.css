@@ -1,17 +1,13 @@
-
-
 .container {
     display: flex;
     padding: 0.8rem;
-    border: 1px solid var(--gray-300);
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
     background-color: white;
+    border-bottom: 1px solid var(--gray-300);
 }
 
 .breedImage {
-    height: 150px;
-    width: 150px;
+    height: 80px;
+    width: 80px;
     object-fit: cover;
     border-radius: 0.5rem;
     margin-right: 1rem;
@@ -19,8 +15,14 @@
 
 .infoContainer h1 {
     color: var(--gray-900);
-    font-size: 1.5rem;
+    font-size: var(--font-lg);
+    line-height: var(--line-lg);
     margin-bottom: 0.5rem;
+}
+
+.infoContainer>p {
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
 }
 
 .goBtn {
@@ -28,7 +30,7 @@
     margin-top: 1rem;
     display: inline-flex;
     align-items: center;
-    text-decoration: none;    
+    text-decoration: none;
 }
 
 .goBtn span {
@@ -38,7 +40,31 @@
 .heading {
     text-decoration: none;
 }
+
 .heading h1:hover {
     color: var(--blue-700);
     text-decoration: underline;
+}
+
+@media (min-width: 800px) {
+    .breedImage {
+        width: 150px;
+        height: 150px;
+    }
+
+    .container {
+        border-radius: var(--rounded-md);
+        margin-bottom: 1rem;
+        border: 1px solid var(--gray-300);
+    }
+
+    .infoContainer h1 {
+        font-size: var(--font-2xl);
+        line-height: var(--font-2xl);
+    }
+
+    .infoContainer>p {
+        font-size: var(--font-base);
+        line-height: var(--line-base);
+    }
 }
