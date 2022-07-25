@@ -1,7 +1,8 @@
 
 
 .formInput {
-    componses: textSm from "./Utilities.module.css";
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
     background-color: var(--gray-50);
     border: 1px solid var(--gray-300);
     color: var(--gray-900);
@@ -46,13 +47,15 @@
 
 .btnSm {
     composes: btn;
-    componses: textSm from "./Utilities.module.css";
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
     padding: 0.5rem 0.75rem; 
     text-align: center;
 }
 
 .select {
-    componses: textBase from "./Utilities.module.css";
+    font-size: var(--font-base);
+    line-height: var(--line-base);
     padding: 0.5rem 0.75rem; 
     color: var(--gray-900);
     background-color: var(--gray-50);
