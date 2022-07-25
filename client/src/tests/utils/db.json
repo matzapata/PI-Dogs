@@ -1,0 +1,646 @@
+{
+    "dogs": [
+        {
+            "id": 1,
+            "name": "Affenpinscher",
+            "image": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg",
+            "weight": "3 - 6",
+            "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
+            "origin": "dogApi"
+        },
+        {
+            "id": 2,
+            "name": "Afghan Hound",
+            "image": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg",
+            "weight": "23 - 27",
+            "temperament": "Aloof, Clownish, Dignified, Independent, Happy",
+            "origin": "dogApi"
+        },
+        {
+            "id": 3,
+            "name": "African Hunting Dog",
+            "image": "https://cdn2.thedogapi.com/images/rkiByec47.jpg",
+            "weight": "20 - 30",
+            "temperament": "Wild, Hardworking, Dutiful",
+            "origin": "dogApi"
+        },
+        {
+            "id": 4,
+            "name": "Airedale Terrier",
+            "image": "https://cdn2.thedogapi.com/images/1-7cgoZSh.jpg",
+            "weight": "18 - 29",
+            "temperament": "Outgoing, Friendly, Alert, Confident, Intelligent, Courageous",
+            "origin": "dogApi"
+        },
+        {
+            "id": 5,
+            "name": "Akbash Dog",
+            "image": "https://cdn2.thedogapi.com/images/26pHT3Qk7.jpg",
+            "weight": "41 - 54",
+            "temperament": "Loyal, Independent, Intelligent, Brave",
+            "origin": "dogApi"
+        },
+        {
+            "id": 6,
+            "name": "Akita",
+            "image": "https://cdn2.thedogapi.com/images/BFRYBufpm.jpg",
+            "weight": "29 - 52",
+            "temperament": "Docile, Alert, Responsive, Dignified, Composed, Friendly, Receptive, Faithful, Courageous",
+            "origin": "dogApi"
+        },
+        {
+            "id": 7,
+            "name": "Alapaha Blue Blood Bulldog",
+            "image": "https://cdn2.thedogapi.com/images/33mJ-V3RX.jpg",
+            "weight": "25 - 41",
+            "temperament": "Loving, Protective, Trainable, Dutiful, Responsible",
+            "origin": "dogApi"
+        },
+        {
+            "id": 8,
+            "name": "Alaskan Husky",
+            "image": "https://cdn2.thedogapi.com/images/-HgpNnGXl.jpg",
+            "weight": "17 - 23",
+            "temperament": "Friendly, Energetic, Loyal, Gentle, Confident",
+            "origin": "dogApi"
+        },
+        {
+            "id": 9,
+            "name": "Alaskan Malamute",
+            "image": "https://cdn2.thedogapi.com/images/dW5UucTIW.jpg",
+            "weight": "29 - 45",
+            "temperament": "Friendly, Affectionate, Devoted, Loyal, Dignified, Playful",
+            "origin": "dogApi"
+        },
+        {
+            "id": 10,
+            "name": "American Bulldog",
+            "image": "https://cdn2.thedogapi.com/images/pk1AAdloG.jpg",
+            "weight": "27 - 54",
+            "temperament": "Friendly, Assertive, Energetic, Loyal, Gentle, Confident, Dominant",
+            "origin": "dogApi"
+        },
+        {
+            "id": 11,
+            "name": "American Bully",
+            "image": "https://cdn2.thedogapi.com/images/sqQJDtbpY.jpg",
+            "weight": "14 - 68",
+            "temperament": "Strong Willed, Stubborn, Friendly, Clownish, Affectionate, Loyal, Obedient, Intelligent, Courageous",
+            "origin": "dogApi"
+        },
+        {
+            "id": 12,
+            "name": "American Eskimo Dog",
+            "image": "https://cdn2.thedogapi.com/images/Bymjyec4m.jpg",
+            "weight": "9 - 18",
+            "temperament": "Friendly, Alert, Reserved, Intelligent, Protective",
+            "origin": "dogApi"
+        },
+        {
+            "id": 13,
+            "name": "American Eskimo Dog (Miniature)",
+            "image": "https://cdn2.thedogapi.com/images/_gn8GLrE6.jpg",
+            "weight": "3 - 5",
+            "temperament": "Friendly, Alert, Reserved, Intelligent, Protective",
+            "origin": "dogApi"
+        },
+        {
+            "id": 14,
+            "name": "American Foxhound",
+            "image": "https://cdn2.thedogapi.com/images/S14n1x9NQ.jpg",
+            "weight": "29 - 34",
+            "temperament": "Kind, Sweet-Tempered, Loyal, Independent, Intelligent, Loving",
+            "origin": "dogApi"
+        },
+        {
+            "id": 15,
+            "name": "American Pit Bull Terrier",
+            "image": "https://cdn2.thedogapi.com/images/HkC31gcNm.png",
+            "weight": "14 - 27",
+            "temperament": "Strong Willed, Stubborn, Friendly, Clownish, Affectionate, Loyal, Obedient, Intelligent, Courageous",
+            "origin": "dogApi"
+        },
+        {
+            "id": 16,
+            "name": "American Staffordshire Terrier",
+            "image": "https://cdn2.thedogapi.com/images/rJIakgc4m.jpg",
+            "weight": "23 - 27",
+            "temperament": "Tenacious, Friendly, Devoted, Loyal, Attentive, Courageous",
+            "origin": "dogApi"
+        },
+        {
+            "id": "c38d4e7e-c234-4bb4-910d-cb25e51293e9",
+            "name": "doggy hound",
+            "weight": "30 - 32",
+            "temperament": "Stubborn, Curious, Playful",
+            "origin": "user"
+        }
+    ],
+    "dogDetail": {
+        "id": 9,
+        "name": "Alaskan Malamute",
+        "image": "https://cdn2.thedogapi.com/images/dW5UucTIW.jpg",
+        "weight": "29 - 45",
+        "temperament": "Friendly, Affectionate, Devoted, Loyal, Dignified, Playful",
+        "lifespan": "12 - 15 years",
+        "height": "58 - 64"
+    },
+    "temperaments": [
+        {
+            "id": 1,
+            "name": "Stubborn"
+        },
+        {
+            "id": 2,
+            "name": "Curious"
+        },
+        {
+            "id": 3,
+            "name": "Playful"
+        },
+        {
+            "id": 4,
+            "name": "Adventurous"
+        },
+        {
+            "id": 5,
+            "name": "Active"
+        },
+        {
+            "id": 6,
+            "name": "Fun-loving"
+        },
+        {
+            "id": 7,
+            "name": "Aloof"
+        },
+        {
+            "id": 8,
+            "name": "Clownish"
+        },
+        {
+            "id": 9,
+            "name": "Dignified"
+        },
+        {
+            "id": 10,
+            "name": "Independent"
+        },
+        {
+            "id": 11,
+            "name": "Happy"
+        },
+        {
+            "id": 12,
+            "name": "Wild"
+        },
+        {
+            "id": 13,
+            "name": "Hardworking"
+        },
+        {
+            "id": 14,
+            "name": "Dutiful"
+        },
+        {
+            "id": 15,
+            "name": "Outgoing"
+        },
+        {
+            "id": 16,
+            "name": "Friendly"
+        },
+        {
+            "id": 17,
+            "name": "Alert"
+        },
+        {
+            "id": 18,
+            "name": "Confident"
+        },
+        {
+            "id": 19,
+            "name": "Intelligent"
+        },
+        {
+            "id": 20,
+            "name": "Courageous"
+        },
+        {
+            "id": 21,
+            "name": "Loyal"
+        },
+        {
+            "id": 22,
+            "name": "Brave"
+        },
+        {
+            "id": 23,
+            "name": "Docile"
+        },
+        {
+            "id": 24,
+            "name": "Responsive"
+        },
+        {
+            "id": 25,
+            "name": "Composed"
+        },
+        {
+            "id": 26,
+            "name": "Receptive"
+        },
+        {
+            "id": 27,
+            "name": "Faithful"
+        },
+        {
+            "id": 28,
+            "name": "Loving"
+        },
+        {
+            "id": 29,
+            "name": "Protective"
+        },
+        {
+            "id": 30,
+            "name": "Trainable"
+        },
+        {
+            "id": 31,
+            "name": "Responsible"
+        },
+        {
+            "id": 32,
+            "name": "Energetic"
+        },
+        {
+            "id": 33,
+            "name": "Gentle"
+        },
+        {
+            "id": 34,
+            "name": "Affectionate"
+        },
+        {
+            "id": 35,
+            "name": "Devoted"
+        },
+        {
+            "id": 36,
+            "name": "Assertive"
+        },
+        {
+            "id": 37,
+            "name": "Dominant"
+        },
+        {
+            "id": 38,
+            "name": "StrongWilled"
+        },
+        {
+            "id": 39,
+            "name": "Obedient"
+        },
+        {
+            "id": 40,
+            "name": "Reserved"
+        },
+        {
+            "id": 41,
+            "name": "Kind"
+        },
+        {
+            "id": 42,
+            "name": "Sweet-Tempered"
+        },
+        {
+            "id": 43,
+            "name": "Tenacious"
+        },
+        {
+            "id": 44,
+            "name": "Attentive"
+        },
+        {
+            "id": 45,
+            "name": "Steady"
+        },
+        {
+            "id": 46,
+            "name": "Bold"
+        },
+        {
+            "id": 47,
+            "name": "Proud"
+        },
+        {
+            "id": 48,
+            "name": "Reliable"
+        },
+        {
+            "id": 49,
+            "name": "Fearless"
+        },
+        {
+            "id": 50,
+            "name": "Lively"
+        },
+        {
+            "id": 51,
+            "name": "Self-assured"
+        },
+        {
+            "id": 52,
+            "name": "Cautious"
+        },
+        {
+            "id": 53,
+            "name": "Eager"
+        },
+        {
+            "id": 54,
+            "name": "Good-natured"
+        },
+        {
+            "id": 55,
+            "name": "Spirited"
+        },
+        {
+            "id": 56,
+            "name": "Companionable"
+        },
+        {
+            "id": 57,
+            "name": "EvenTempered"
+        },
+        {
+            "id": 58,
+            "name": "Rugged"
+        },
+        {
+            "id": 59,
+            "name": "Fierce"
+        },
+        {
+            "id": 60,
+            "name": "Refined"
+        },
+        {
+            "id": 61,
+            "name": "Joyful"
+        },
+        {
+            "id": 62,
+            "name": "Agile"
+        },
+        {
+            "id": 63,
+            "name": "Amiable"
+        },
+        {
+            "id": 64,
+            "name": "Excitable"
+        },
+        {
+            "id": 65,
+            "name": "Determined"
+        },
+        {
+            "id": 66,
+            "name": "Self-confidence"
+        },
+        {
+            "id": 67,
+            "name": "Hardy"
+        },
+        {
+            "id": 68,
+            "name": "Calm"
+        },
+        {
+            "id": 69,
+            "name": "Good-tempered"
+        },
+        {
+            "id": 70,
+            "name": "Watchful"
+        },
+        {
+            "id": 71,
+            "name": "Hard-working"
+        },
+        {
+            "id": 72,
+            "name": "Feisty"
+        },
+        {
+            "id": 73,
+            "name": "Cheerful"
+        },
+        {
+            "id": 74,
+            "name": "Sensitive"
+        },
+        {
+            "id": 75,
+            "name": "Easygoing"
+        },
+        {
+            "id": 76,
+            "name": "Adaptable"
+        },
+        {
+            "id": 77,
+            "name": "Trusting"
+        },
+        {
+            "id": 78,
+            "name": "Lovable"
+        },
+        {
+            "id": 79,
+            "name": "Territorial"
+        },
+        {
+            "id": 80,
+            "name": "Keen"
+        },
+        {
+            "id": 81,
+            "name": "Familial"
+        },
+        {
+            "id": 82,
+            "name": "Rational"
+        },
+        {
+            "id": 83,
+            "name": "Bright"
+        },
+        {
+            "id": 84,
+            "name": "Quick"
+        },
+        {
+            "id": 85,
+            "name": "Powerful"
+        },
+        {
+            "id": 86,
+            "name": "Gay"
+        },
+        {
+            "id": 87,
+            "name": "Stable"
+        },
+        {
+            "id": 88,
+            "name": "Quiet"
+        },
+        {
+            "id": 89,
+            "name": "Inquisitive"
+        },
+        {
+            "id": 90,
+            "name": "Strong"
+        },
+        {
+            "id": 91,
+            "name": "Sociable"
+        },
+        {
+            "id": 92,
+            "name": "Patient"
+        },
+        {
+            "id": 93,
+            "name": "Suspicious"
+        },
+        {
+            "id": 94,
+            "name": "Great-hearted"
+        },
+        {
+            "id": 95,
+            "name": "Merry"
+        },
+        {
+            "id": 96,
+            "name": "Vocal"
+        },
+        {
+            "id": 97,
+            "name": "Tolerant"
+        },
+        {
+            "id": 98,
+            "name": "Mischievous"
+        },
+        {
+            "id": 99,
+            "name": "People-Oriented"
+        },
+        {
+            "id": 100,
+            "name": "Bossy"
+        },
+        {
+            "id": 101,
+            "name": "Cunning"
+        },
+        {
+            "id": 102,
+            "name": "Athletic"
+        },
+        {
+            "id": 103,
+            "name": "Boisterous"
+        },
+        {
+            "id": 104,
+            "name": "Cooperative"
+        },
+        {
+            "id": 105,
+            "name": "Trustworthy"
+        },
+        {
+            "id": 106,
+            "name": "Self-important"
+        },
+        {
+            "id": 107,
+            "name": "Respectful"
+        },
+        {
+            "id": 108,
+            "name": "Thoughtful"
+        },
+        {
+            "id": 109,
+            "name": "Generous"
+        },
+        {
+            "id": 110,
+            "name": "Cat-like"
+        },
+        {
+            "id": 111,
+            "name": "Sturdy"
+        },
+        {
+            "id": 112,
+            "name": "Benevolent"
+        },
+        {
+            "id": 113,
+            "name": "Clever"
+        },
+        {
+            "id": 114,
+            "name": "Bubbly"
+        },
+        {
+            "id": 115,
+            "name": "Opinionated"
+        },
+        {
+            "id": 116,
+            "name": "Aggressive"
+        },
+        {
+            "id": 117,
+            "name": "Extroverted"
+        },
+        {
+            "id": 118,
+            "name": "Charming"
+        },
+        {
+            "id": 119,
+            "name": "Unflappable"
+        },
+        {
+            "id": 120,
+            "name": "Spunky"
+        },
+        {
+            "id": 121,
+            "name": "Diligent"
+        },
+        {
+            "id": 122,
+            "name": "Willful"
+        },
+        {
+            "id": 123,
+            "name": "Fast"
+        },
+        {
+            "id": 124,
+            "name": "Vigilant"
+        }
+    ]
+}
