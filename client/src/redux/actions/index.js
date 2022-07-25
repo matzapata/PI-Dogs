@@ -44,7 +44,7 @@ export function setTemperaments(temperaments) {
 export function fetchAllDogs() {
     return async function (dispatch) {
         const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs`);
-        dispatch(setSearch("All"))
+        dispatch(setSearch("All"));
         dispatch(setDogs(res.data));
     };
 }
@@ -52,7 +52,7 @@ export function fetchAllDogs() {
 export function fetchDogsName(name) {
     return async function (dispatch) {
         const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs?name=${name}`);
-        dispatch(setSearch(name))
+        dispatch(setSearch(name));
         dispatch(setDogs(res.data));
     };
 }
@@ -70,17 +70,20 @@ export function fetchTemperaments() {
 
 export function fetchDogDetail(dogId) {
     return async function (dispatch) {
-        const response = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs/${dogId}`);
-        if (response.status === 404) dispatch(setDogDetail({
-            id: null,
-            name: null,
-            image: null,
-            weight: null,
-            temperament: null,
-            lifespan: null,
-            height: null,
-        }));
-        else dispatch(setDogDetail(response.data));
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs/${dogId}`);
+            dispatch(setDogDetail(response.data));
+        } catch (e) {
+            dispatch(setDogDetail({
+                id: null,
+                name: null,
+                image: null,
+                weight: null,
+                temperament: null,
+                lifespan: null,
+                height: null,
+            }));
+        }
     };
 }
 

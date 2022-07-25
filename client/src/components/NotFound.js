@@ -7,7 +7,7 @@ export default function NotFound() {
         <div className={s.container}>
             <PawIcon className={s.icon} />
             <h2>Oh no!</h2>
-            <p>Couldn't any match.</p>
+            <p>Couldn't find any match.</p>
         </div>
     );
 }

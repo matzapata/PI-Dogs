@@ -10,6 +10,7 @@ import ScaleIcon from "../components/Icons/Scale";
 import HeartIcon from "../components/Icons/Heart";
 import VariableIcon from "../components/Icons/Variable";
 import BackButton from "../components/BackButton";
+import NotFound from "../components/NotFound";
 
 export default function BreedDetail() {
     const { id } = useParams();
@@ -26,34 +27,38 @@ export default function BreedDetail() {
             <div className={s.backBtnContainer}>
                 <BackButton />
             </div>
-            <div className={s.dogDetailContainer}>
-                <h1>{breedDetail.name}</h1>
-                <ul className={s.temperamentList}>
-                    {breedDetail.temperament?.map((t) => <li key={t}>{t}</li>)}
-                </ul>
-                <div className={s.detailCardContainer}>
-                    <DetailCard
-                        icon={<ScaleIcon />}
-                        label="Weight"
-                        value={`${breedDetail.weight} kg`}
-                    />
-                    <DetailCard
-                        icon={<VariableIcon />}
-                        label="Height"
-                        value={`${breedDetail.height} cm`}
-                    />
-                    <DetailCard
-                        icon={<HeartIcon />}
-                        label="Lifespan"
-                        value={`${breedDetail.lifespan}`}
-                    />
+            {breedDetail.id === null ?
+                <NotFound />
+                :
+                <div className={s.dogDetailContainer}>
+                    <h1>{breedDetail.name}</h1>
+                    <ul className={s.temperamentList}>
+                        {breedDetail.temperament?.map((t) => <li key={t}>{t}</li>)}
+                    </ul>
+                    <div className={s.detailCardContainer}>
+                        <DetailCard
+                            icon={<ScaleIcon />}
+                            label="Weight"
+                            value={`${breedDetail.weight} kg`}
+                        />
+                        <DetailCard
+                            icon={<VariableIcon />}
+                            label="Height"
+                            value={`${breedDetail.height} cm`}
+                        />
+                        <DetailCard
+                            icon={<HeartIcon />}
+                            label="Lifespan"
+                            value={`${breedDetail.lifespan}`}
+                        />
+                    </div>
+                    {breedDetail.image ?
+                        <img src={breedDetail.image} alt={breedDetail.name} />
+                        :
+                        <p>No image provided</p>
+                    }
                 </div>
-                {breedDetail.image ?
-                    <img src={breedDetail.image} alt={breedDetail.name} />
-                    :
-                    <p>No image provided</p>
-                }
-            </div>
+            }
         </div>
     );
 }
