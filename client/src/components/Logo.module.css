@@ -1,0 +1,13 @@
+
+
+.container {
+    background-color: var(--blue-500);
+    display: inline-block;
+    padding: 0.25rem;
+    border-radius: var(--rounded);
+}
+
+.icon {
+    height: 24px;
+    fill: white;
+}

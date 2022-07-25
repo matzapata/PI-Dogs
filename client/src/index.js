@@ -3,28 +3,18 @@ import ReactDOM from 'react-dom';
 import store from './redux/store';
 import { Provider } from "react-redux";
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import App from './App';
 
 // Styles
 import './styles/index.css';
-
-// Routes
-import Landing from './pages/Landing';
-import Home from './pages/Home';
-import NewBreed from './pages/NewBreed';
-import BreedDetail from './pages/BreedDetail';
 
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route exact path="/breeds" component={Home} />
-          <Route exact path="/breeds/new" component={NewBreed} />
-          <Route exact path="/breeds/:id" component={BreedDetail} />
-        </Switch>
+        <App />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

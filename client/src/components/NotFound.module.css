@@ -1,0 +1,16 @@
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-900);
+}
+
+.container p {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.icon {
+    height: 50px;
+    fill: var(--gray-900);
+}

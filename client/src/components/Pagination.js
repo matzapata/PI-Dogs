@@ -15,14 +15,20 @@ export default function Pagination() {
             <div>
                 <button
                     disabled={pagination.prev === null}
-                    onClick={() => { dispatch(prevPage()); }}
+                    onClick={() => { 
+                        dispatch(prevPage()); 
+                        window.scrollTo(0, 0);
+                    }}
                 >
                     <ArrowNarrowLeft style={{ height: "1rem" }} />
                     <span>Prev</span>
                 </button>
                 <button
                     disabled={pagination.next === null}
-                    onClick={() => { dispatch(nextPage()); }}
+                    onClick={() => { 
+                        dispatch(nextPage()); 
+                        window.scrollTo(0, 0);
+                    }}
                 >
                     <span>Next</span>
                     <ArrowNarrowRight style={{ height: "1rem" }} />

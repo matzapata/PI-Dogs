@@ -1,3 +1,4 @@
+import applyFilters, { filterByOrigin, filterByTemperament } from "../../utils/applyFilters";
 import {
     SET_DOGS,
     SET_DOG_DETAIL,
@@ -5,10 +6,17 @@ import {
     NEXT_PAGE,
     PREV_PAGE,
     SORT_DOGS,
+    FILTER_DOGS_TEMPERAMENT,
+    FILTER_DOGS_ORIGIN,
 } from "../actions/constants";
 
 const initialState = {
     dogs: [],
+    filteredDogs: [],
+    filters: {
+        temperament: 'all',
+        origin: 'all',
+    },
     pagination: {
         next: 0,
         prev: 0,
@@ -37,6 +45,7 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dogs: action.payload,
+                filteredDogs: action.payload,
                 pagination: {
                     next: (totalPages === 1) ? null : 2,
                     prev: null,
@@ -68,7 +77,7 @@ const rootReducer = (state = initialState, action) => {
                     current: state.pagination.current + 1,
                     total: state.pagination.total,
                     pageSize: state.pagination.pageSize,
-                    pageContent: state.dogs.slice(
+                    pageContent: state.filteredDogs.slice(
                         (state.pagination.current) * state.pagination.pageSize
                         ,
                         (state.pagination.current + 1) * state.pagination.pageSize
@@ -83,7 +92,7 @@ const rootReducer = (state = initialState, action) => {
                     next: state.pagination.current,
                     prev: (state.pagination.current - 1 === 1) ? null : state.pagination.current - 2,
                     current: state.pagination.current - 1,
-                    pageContent: state.dogs.slice(
+                    pageContent: state.filteredDogs.slice(
                         (state.pagination.current - 2) * state.pagination.pageSize
                         ,
                         (state.pagination.current - 1) * state.pagination.pageSize
@@ -91,19 +100,61 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
         case SORT_DOGS: {
-            const sortedDogs = [...state.dogs];
-            sortedDogs.sort(action.payload);
+            const sortFilteredDogs = [...state.filteredDogs].sort(action.payload);
 
             return {
                 ...state,
-                dogs: sortedDogs,
+                dogs: [...state.dogs].sort(action.payload),
+                filteredDogs: sortFilteredDogs,
                 pagination: {
                     next: (state.pagination.total === 1) ? null : 2,
                     prev: null,
                     current: 1,
                     total: state.pagination.total,
                     pageSize: state.pagination.pageSize,
-                    pageContent: sortedDogs.slice(0, state.pagination.pageSize)
+                    pageContent: sortFilteredDogs.slice(0, state.pagination.pageSize)
+                }
+            };
+        }
+        case FILTER_DOGS_TEMPERAMENT: {
+            const filteredDogs = applyFilters(state.dogs, [ filterByOrigin(state.filters.origin), filterByTemperament(action.payload) ])
+            const totalPages = Math.ceil(filteredDogs.length / state.pagination.pageSize);
+
+            return {
+                ...state,
+                filteredDogs: filteredDogs,
+                filters: {
+                    ...state.filters,
+                    temperament: action.payload
+                },
+                pagination: {
+                    next: (totalPages === 1) ? null : 2,
+                    prev: null,
+                    current: 1,
+                    total: totalPages,
+                    pageSize: state.pagination.pageSize,
+                    pageContent: filteredDogs.slice(0, state.pagination.pageSize)
+                }
+            };
+        }
+        case FILTER_DOGS_ORIGIN: {
+            const filteredDogs = applyFilters(state.dogs, [ filterByOrigin(action.payload), filterByTemperament(state.filters.temperament) ])
+            const totalPages = Math.ceil(filteredDogs.length / state.pagination.pageSize);
+
+            return {
+                ...state,
+                filteredDogs: filteredDogs,
+                filters: {
+                    ...state.filters,
+                    origin: action.payload
+                },
+                pagination: {
+                    next: (totalPages === 1) ? null : 2,
+                    prev: null,
+                    current: 1,
+                    total: totalPages,
+                    pageSize: state.pagination.pageSize,
+                    pageContent: filteredDogs.slice(0, state.pagination.pageSize)
                 }
             };
         }

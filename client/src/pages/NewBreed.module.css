@@ -1,0 +1,67 @@
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    border: 1px solid var(--gray-300);
+    padding: 2rem;
+    border-radius: var(--rounded-md);
+    background-color: white ;
+}
+
+.container > div {
+    margin-bottom: 1rem;
+}
+
+.header {
+    margin-bottom: 1rem;
+    color: var(--gray-900);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.row > div {
+    display: inline-block;
+    width: 350px;
+}
+
+.temperamentsList {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.temperamentsList > li {
+    margin-bottom: 0.5rem;
+}
+
+.error {
+    color: var(--red-600);
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+    margin-top: 0.25rem;
+}
+
+.temperament {
+    list-style: none;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--rounded);
+    padding: 0.15rem 0.5rem;
+    background-color: var(--gray-100);
+    margin-right: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+}
+.temperament span {
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+    margin-right: 1rem;
+}
+.temperament button {
+    background-color: var(--gray-100);
+    border: none;
+}
+.temperament button svg {
+    height: var(--font-sm);
+}

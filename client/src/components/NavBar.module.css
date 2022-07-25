@@ -1,0 +1,31 @@
+
+.container {
+    padding: 1rem 10rem;
+    border-bottom: 1px solid var(--gray-300);
+    display:  flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+}
+
+.leftContainer {
+    display: flex;
+    align-items: center;
+}
+
+.navItems {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.navItems li {
+    margin: 0 1rem;
+}
+
+.navItems li a {
+    text-decoration: none;
+    color: var(--gray-600);
+    font-weight: 500;
+}

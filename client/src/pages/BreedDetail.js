@@ -1,53 +1,56 @@
 import { useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDogDetail } from '../redux/actions';
 
-import s from "./BreedDetail.module.css"
-import ArrowNarrowLeft from "../components/Icons/ArrowNarrowLeft";
+import s from "./BreedDetail.module.css";
 import DetailCard from "../components/DetailCard";
 
-import ScaleIcon from "../components/Icons/Scale"
-import HeartIcon from "../components/Icons/Heart"
-import VariableIcon from "../components/Icons/Variable"
+import ScaleIcon from "../components/Icons/Scale";
+import HeartIcon from "../components/Icons/Heart";
+import VariableIcon from "../components/Icons/Variable";
+import BackButton from "../components/BackButton";
 
 export default function BreedDetail() {
     const { id } = useParams();
     const dispatch = useDispatch();
-    const history = useHistory()
     const breedDetail = useSelector(state => state.dogDetail);
 
     useEffect(() => {
         dispatch(fetchDogDetail(id));
+        window.scrollTo(0, 0);
     }, [id]);
 
     return (
         <div className={s.container}>
-            <button className={s.backBtn} onClick={history.goBack}>
-                <ArrowNarrowLeft style={{ height: "1rem" }}/>
-                <span>Back</span>
-            </button>
+            <div style={{ margin: "2rem 0" }}>
+                <BackButton />
+            </div>
             <div className={s.dogDetailContainer}>
                 <h1>{breedDetail.name}</h1>
                 <p>{breedDetail.temperament}</p>
                 <div className={s.detailCardContainer}>
-                    <DetailCard 
+                    <DetailCard
                         icon={<ScaleIcon />}
                         label="Weight"
                         value={`${breedDetail.weight} kg`}
                     />
-                    <DetailCard 
+                    <DetailCard
                         icon={<VariableIcon />}
                         label="Height"
                         value={`${breedDetail.height} cm`}
                     />
-                    <DetailCard 
+                    <DetailCard
                         icon={<HeartIcon />}
                         label="Lifespan"
                         value={`${breedDetail.lifespan}`}
                     />
                 </div>
-                <img src={breedDetail.image} alt={breedDetail.name} />
+                {breedDetail.image ?
+                    <img src={breedDetail.image} alt={breedDetail.name} />
+                    :
+                    <p>No image provided</p>
+                }
             </div>
         </div>
     );
