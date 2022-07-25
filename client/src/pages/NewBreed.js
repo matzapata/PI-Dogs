@@ -102,18 +102,28 @@ export default function NewBreed() {
         const errorMsgs = { ...errors };
 
         if (state.name === '') errorMsgs.name = 'Name is required';
+        else if (/[^a-zA-Z]/.test(state.name.replace(/\s/g, ''))) errorMsgs.name = 'Name can only contain alphabet chars';
         else errorMsgs.name = '';
-        if (state.minHeight <= 0) errorMsgs.minHeight = 'Min height must be greater than 0';
+        
+        if (state.minHeight <= 0) errorMsgs.minHeight = 'Min height must be greater than 0'; 
         else errorMsgs.minHeight = '';
-        if (state.maxHeight === 0) errorMsgs.maxHeight = 'Max height must be greater than 0';
+        
+        if (state.maxHeight <= 0) errorMsgs.maxHeight = 'Max height must be greater than 0';
+        else if (state.maxHeight <= state.minHeight) errorMsgs.maxHeight = 'Max height must be greater than min height';
         else errorMsgs.maxHeight = '';
-        if (state.minWeight === 0) errorMsgs.minWeight = 'Min weight must be greater than 0';
+        
+        if (state.minWeight <= 0) errorMsgs.minWeight = 'Min weight must be greater than 0';
         else errorMsgs.minWeight = '';
-        if (state.maxWeight === 0) errorMsgs.maxWeight = 'Max weight must be greater than 0';
+        
+        if (state.maxWeight <= 0) errorMsgs.maxWeight = 'Max weight must be greater than 0';
+        else if (state.maxWeight <= state.minWeight) errorMsgs.maxWeight = 'Max weight must be greater than min weight';
         else errorMsgs.maxWeight = '';
-        if (state.minLifespan === 0) errorMsgs.minLifespan = 'Min lifespan must be greater than 0';
+
+        if (state.minLifespan <= 0) errorMsgs.minLifespan = 'Min lifespan must be greater than 0';
         else errorMsgs.minLifespan = '';
-        if (state.maxLifespan === 0) errorMsgs.maxLifespan = 'Max lifespan must be greater than 0';
+        
+        if (state.maxLifespan <= 0) errorMsgs.maxLifespan = 'Max lifespan must be greater than 0';
+        else if (state.maxLifespan <= state.minLifespan) errorMsgs.maxLifespan = 'Max lifespan must be greater than min lifespan';
         else errorMsgs.maxLifespan = '';
 
         let errorsCount = 0;
