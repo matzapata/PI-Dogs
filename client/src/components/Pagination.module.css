@@ -56,3 +56,8 @@
     color: var(--gray-200);
     pointer-events: none;
 }
+
+.pagination div button.active {
+    background-color: var(--gray-100);
+    color: var(--blue-700);
+}

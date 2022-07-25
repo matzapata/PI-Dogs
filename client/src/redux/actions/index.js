@@ -7,6 +7,8 @@ import {
     SET_DOG_DETAIL,
     SET_TEMPERAMENTS,
     SORT_DOGS,
+    SET_PAGE,
+    SET_SEARCH,
 } from "./constants";
 import axios from "axios";
 
@@ -16,6 +18,14 @@ export function setDogs(dogs) {
         payload: dogs
     };
 }
+
+export function setSearch(search) {
+    return {
+        type: SET_SEARCH,
+        payload: search
+    };
+}
+
 
 export function setDogDetail(dogDetail) {
     return {
@@ -32,33 +42,29 @@ export function setTemperaments(temperaments) {
 }
 
 export function fetchAllDogs() {
-    return function (dispatch) {
-        axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs`)
-            .then(r => r.data)
-            .then(d => dispatch(setDogs(d)))
-            .catch(e => console.log(e));
+    return async function (dispatch) {
+        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs`);
+        dispatch(setSearch("All"))
+        dispatch(setDogs(res.data));
     };
 }
 
 export function fetchDogsName(name) {
-    return function (dispatch) {
-        axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs?name=${name}`)
-            .then(r => r.data)
-            .then(d => dispatch(setDogs(d)))
-            .catch(e => console.log(e));
+    return async function (dispatch) {
+        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs?name=${name}`);
+        dispatch(setSearch(name))
+        dispatch(setDogs(res.data));
     };
 }
 
 export function fetchTemperaments() {
-    return function (dispatch) {
-        axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/temperaments`)
-            .then(r => r.data)
-            .then(t => dispatch(setTemperaments(t.sort(function (a, b) {
-                if (a.name < b.name) { return -1; }
-                if (a.name > b.name) { return 1; }
-                return 0;
-            }))))
-            .catch(e => console.log(e));
+    return async function (dispatch) {
+        const res = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/temperaments`);
+        dispatch(setTemperaments(res.data.sort(function (a, b) {
+            if (a.name < b.name) { return -1; }
+            if (a.name > b.name) { return 1; }
+            return 0;
+        })));
     };
 }
 
@@ -87,6 +93,13 @@ export function nextPage() {
 export function prevPage() {
     return {
         type: PREV_PAGE
+    };
+}
+
+export function setPage(p) {
+    return {
+        type: SET_PAGE,
+        payload: p
     };
 }
 

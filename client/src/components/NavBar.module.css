@@ -1,11 +1,16 @@
 
 .container {
-    padding: 1rem 10rem;
     border-bottom: 1px solid var(--gray-300);
+    background-color: white;
+}
+
+.innerContainer {
     display:  flex;
+    padding: 1rem;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .leftContainer {

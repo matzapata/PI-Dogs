@@ -16,14 +16,15 @@ export default function Home() {
     const dispatch = useDispatch();
     const pagination = useSelector(state => state.pagination);
     const filteredDogs = useSelector(state => state.filteredDogs);
+    const search = useSelector(state => state.search)
 
     useEffect(() => { dispatch(fetchAllDogs()); }, []);
 
     return (
         <div className={s.breedsContainer}>
             <div className={s.filterContainer}>
-                <h2>All</h2>
-                <p>{filteredDogs    .length} results for search hood</p>
+                <h2>{search}</h2>
+                <p>{filteredDogs.length} results for search {search}</p>
                 <div style={{ marginTop: "1rem" }}>
                     <SortButtons />
                     <TemperamentFilter />

@@ -8,11 +8,14 @@ import {
     SORT_DOGS,
     FILTER_DOGS_TEMPERAMENT,
     FILTER_DOGS_ORIGIN,
+    SET_PAGE,
+    SET_SEARCH,
 } from "../actions/constants";
 
 const initialState = {
     dogs: [],
     filteredDogs: [],
+    search: "All",
     filters: {
         temperament: 'all',
         origin: 'all',
@@ -56,6 +59,11 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
         }
+        case SET_SEARCH: 
+            return {
+                ...state,
+                search: action.payload
+            }
         case SET_DOG_DETAIL:
             return {
                 ...state,
@@ -99,6 +107,22 @@ const rootReducer = (state = initialState, action) => {
                     )
                 }
             };
+        case SET_PAGE:
+            return {
+                ...state,
+                pagination: {
+                    next: (action.payload === state.pagination.total) ? null : action.payload + 1,
+                    prev: action.payload - 1,
+                    current: action.payload,
+                    total: state.pagination.total,
+                    pageSize: state.pagination.pageSize,
+                    pageContent: state.filteredDogs.slice(
+                        (action.payload - 1) * state.pagination.pageSize
+                        ,
+                        (action.payload) * state.pagination.pageSize
+                    )
+                }
+            };
         case SORT_DOGS: {
             const sortFilteredDogs = [...state.filteredDogs].sort(action.payload);
 
@@ -117,7 +141,7 @@ const rootReducer = (state = initialState, action) => {
             };
         }
         case FILTER_DOGS_TEMPERAMENT: {
-            const filteredDogs = applyFilters(state.dogs, [ filterByOrigin(state.filters.origin), filterByTemperament(action.payload) ])
+            const filteredDogs = applyFilters(state.dogs, [filterByOrigin(state.filters.origin), filterByTemperament(action.payload)]);
             const totalPages = Math.ceil(filteredDogs.length / state.pagination.pageSize);
 
             return {
@@ -138,7 +162,7 @@ const rootReducer = (state = initialState, action) => {
             };
         }
         case FILTER_DOGS_ORIGIN: {
-            const filteredDogs = applyFilters(state.dogs, [ filterByOrigin(action.payload), filterByTemperament(state.filters.temperament) ])
+            const filteredDogs = applyFilters(state.dogs, [filterByOrigin(action.payload), filterByTemperament(state.filters.temperament)]);
             const totalPages = Math.ceil(filteredDogs.length / state.pagination.pageSize);
 
             return {

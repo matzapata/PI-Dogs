@@ -28,7 +28,9 @@ export default function BreedDetail() {
             </div>
             <div className={s.dogDetailContainer}>
                 <h1>{breedDetail.name}</h1>
-                <p>{breedDetail.temperament}</p>
+                <ul className={s.temperamentList}>
+                    {breedDetail.temperament?.map((t) => <li key={t}>{t}</li>)}
+                </ul>
                 <div className={s.detailCardContainer}>
                     <DetailCard
                         icon={<ScaleIcon />}

@@ -176,7 +176,7 @@ export default function NewBreed() {
                     <select className={sComponents.select} name="addTemperament" onChange={onChange}>
                         {temperaments?.map((t, i) => <option value={t.id} key={i}>{t.name}</option>)}
                     </select>
-                    <button className={sComponents.btnSm} type="button" onClick={() => addTemperament()}>Add</button>
+                    <button className={sComponents.btnSm} style={{marginLeft: "0.5rem"}} type="button" onClick={() => addTemperament()}>Add</button>
                     <ul className={s.temperamentsList}>
                         {state.temperaments.map((t, i) =>
                             <li key={i} className={s.temperament}>

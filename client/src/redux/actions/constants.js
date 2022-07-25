@@ -7,3 +7,5 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const PREV_PAGE = "PREV_PAGE";
 export const FILTER_DOGS_TEMPERAMENT = "FILTER_DOGS_TEMPERAMENT";
 export const FILTER_DOGS_ORIGIN = "FILTER_DOGS_ORIGIN";
+export const SET_PAGE = "SET_PAGE";
+export const SET_SEARCH = "SET_SEARCH";

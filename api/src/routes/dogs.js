@@ -48,7 +48,7 @@ router.get('/:breedId', async function (req, res) {
             name: b.name,
             image: (b.image?.url) ? b.image?.url : "",
             weight: (b.weight.metric) ? b.weight.metric : b.weight,
-            temperament: (b.temperaments === undefined) ? b.temperament : b.temperaments.map(t => t.name).join(', '),
+            temperament: (b.temperaments === undefined) ? b.temperament?.replace(/\s/g, '').split(',') : b.temperaments.map(t => t.name),
             lifespan: (b.lifespan) ? b.lifespan : b.life_span,
             height: (b.height.metric === undefined) ? b.height : b.height.metric
         };
