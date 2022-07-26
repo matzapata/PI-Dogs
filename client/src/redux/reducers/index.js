@@ -12,7 +12,7 @@ import {
     SET_SEARCH,
 } from "../actions/constants";
 
-const initialState = {
+export const initialState = {
     dogs: [],
     filteredDogs: [],
     search: "All",
