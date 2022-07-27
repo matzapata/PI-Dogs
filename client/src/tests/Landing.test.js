@@ -1,31 +1,25 @@
 
-import { render, screen } from '@testing-library/react';
-import Landing from '../pages/Landing';
-import backgroundImage from "../images/landing-bg.jpg";
-import { Link, MemoryRouter } from 'react-router-dom';
-import { configure, mount } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-
-configure({ adapter: new Adapter() });
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import { RootComponent } from './utils/rootComponent';
+import { createMemoryHistory } from "history";
 
 describe('Landing', () => {
-    let wrapper;
-
-    beforeEach(() => {
-        wrapper = mount(
-            <MemoryRouter initialEntries={['/']}>
-                <Landing />
-            </MemoryRouter>
-        );
-    })
-
     it('Should render a image', () => {
-        expect(wrapper.find({alt: "background"}).props().style.backgroundImage).toEqual('url(landing-bg.jpg)')
+        const history = createMemoryHistory();
+        render(<RootComponent history={history} />);
+        expect(screen.getByTestId('background').style.backgroundImage).toEqual('url(landing-bg.jpg)');
+
     });
-    
-    it('Should render a link to explore all breeds', () => {
-        expect(wrapper.find(Link)).toHaveLength(1)
-        expect(wrapper.find(Link).props().to).toEqual('/breeds')
+
+    it('Should render a link to explore all breeds', async () => {
+        const history = createMemoryHistory();
+        render(<RootComponent history={history} />);
+
+        expect(screen.getByText(/Explore dog breeds/i)).toBeInTheDocument();
+        expect(screen.getByRole('link').href.replace('http://localhost', '')).toEqual('/breeds');
+
+        fireEvent.click(screen.getByText(/Explore dog breeds/i));
+        expect(history.location.pathname).toBe('/breeds');
     });
 });
+

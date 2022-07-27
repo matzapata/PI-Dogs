@@ -141,7 +141,7 @@
         "name": "Alaskan Malamute",
         "image": "https://cdn2.thedogapi.com/images/dW5UucTIW.jpg",
         "weight": "29 - 45",
-        "temperament": "Friendly, Affectionate, Devoted, Loyal, Dignified, Playful",
+        "temperament": ["Friendly", "Affectionate"],
         "lifespan": "12 - 15 years",
         "height": "58 - 64"
     },
