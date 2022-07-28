@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "",
     "dev": "nodemon -L",
     "test": "jest --verbose",
-    "build": "cd ../client && npm run build && cd ../api",
     "syncDb": "node ./utils/syncDb.js"
   },
   "author": "Henry",
