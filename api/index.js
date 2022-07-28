@@ -23,7 +23,7 @@ require('dotenv').config();
 
 const port = process.env.PORT || 3001; // Railways inyecta el PORT automaticamente 
 
-if (process.env.NODE_ENV === 'dev') {
+if (process.env.NODE_ENV === 'development') {
   // Syncing all the models at once.
   conn.sync({ force: true }).then(async () => {
     await require('./utils/populateTemperaments')(); // Populate temperaments db
