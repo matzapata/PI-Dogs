@@ -29,8 +29,8 @@ export default function Home() {
                 <p>{filteredDogs.length} results for search {search}</p>
                 <div style={{ marginTop: "1rem" }}>
                     <SortButtons />
-                    <TemperamentFilter />
                     <OriginFilter />
+                    <TemperamentFilter />
                 </div>
             </div>
             {loading && <LoadingSpinner style={{margin: '2rem 0'}}/>}

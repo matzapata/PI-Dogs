@@ -1,0 +1,41 @@
+
+
+.container > div > button {
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.temperamentsList {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.temperamentsList>li {
+    margin-bottom: 0.5rem;
+}
+
+.temperament {
+    list-style: none;
+    border: 1px solid var(--gray-300);
+    border-radius: var(--rounded);
+    padding: 0.15rem 0.5rem;
+    background-color: var(--gray-100);
+    margin-right: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.temperament span {
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+    margin-right: 1rem;
+}
+
+.temperament button {
+    background-color: var(--gray-100);
+    border: none;
+}
+
+.temperament button svg {
+    height: var(--font-sm);
+}

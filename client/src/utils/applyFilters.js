@@ -20,10 +20,14 @@ export function filterByOrigin(origin) {
     };
 }
 
-export function filterByTemperament(temperament) {
+export function filterByTemperament(temperaments) {
     return function (dog) {
-        if (temperament === 'all') return true;
-        else if (dog.temperament?.includes(temperament)) return true;
-        else return false;
+        if (temperaments.length === 0) return true;
+        else {
+            for (const ft of temperaments) {
+                if (dog.temperament?.includes(ft)) return true;
+            }
+            return false;
+        }
     };
 }
