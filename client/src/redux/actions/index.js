@@ -9,6 +9,7 @@ import {
     SORT_DOGS,
     SET_PAGE,
     SET_SEARCH,
+    SET_LOADING,
 } from "./constants";
 import { dogApiGetAllDogs, dogApiGetDogByName, dogApiGetDogDetails, dogApiGetDogTemperaments } from "../../utils/apiDogs";
 
@@ -43,7 +44,9 @@ export function setTemperaments(temperaments) {
 
 export function fetchAllDogs() {
     return async function (dispatch) {
+        dispatch(setLoading(true));
         const res = await dogApiGetAllDogs();
+        dispatch(setLoading(false));
         dispatch(setSearch("All"));
         dispatch(setDogs(res.data));
     };
@@ -51,7 +54,9 @@ export function fetchAllDogs() {
 
 export function fetchDogsName(name) {
     return async function (dispatch) {
+        dispatch(setLoading(true));
         const res = await dogApiGetDogByName(name);
+        dispatch(setLoading(false));
         dispatch(setSearch(name));
         dispatch(setDogs(res.data));
     };
@@ -71,8 +76,10 @@ export function fetchTemperaments() {
 export function fetchDogDetail(dogId) {
     return async function (dispatch) {
         try {
+            dispatch(setLoading(true));
             const response = await dogApiGetDogDetails(dogId);
             dispatch(setDogDetail(response.data));
+            dispatch(setLoading(false));
         } catch (e) {
             dispatch(setDogDetail({
                 id: null,
@@ -175,5 +182,12 @@ export function filterDogsOrigin(origin) {
         type: FILTER_DOGS_ORIGIN,
         payload: origin
     };
+}
+
+export function setLoading(loading) {
+    return {
+        type: SET_LOADING,
+        payload: loading
+    }
 }
 

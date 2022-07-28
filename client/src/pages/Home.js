@@ -11,12 +11,14 @@ import s from "./Home.module.css";
 import TemperamentFilter from "../components/TemperamentFilter";
 import OriginFilter from "../components/OriginFilter";
 import NotFound from "../components/NotFound";
+import LoadingSpinner from "../components/LoadingSpinner"
 
 export default function Home() {
     const dispatch = useDispatch();
     const pagination = useSelector(state => state.pagination);
     const filteredDogs = useSelector(state => state.filteredDogs);
-    const search = useSelector(state => state.search)
+    const loading = useSelector(state => state.loading);
+    const search = useSelector(state => state.search);
 
     useEffect(() => { dispatch(fetchAllDogs()); }, []);
 
@@ -31,14 +33,16 @@ export default function Home() {
                     <OriginFilter />
                 </div>
             </div>
-            {pagination.pageContent.length === 0 ?
-                <NotFound />
-                :
-                <ul className={s.cardsContainer}>
-                    {pagination.pageContent.map((d, i) => <BreedCard key={i} breed={d} />)}
-                </ul>
+            {loading && <LoadingSpinner style={{margin: '2rem 0'}}/>}
+            {(!loading && pagination.pageContent.length === 0) && <NotFound />}
+            {(!loading && pagination.pageContent.length !== 0) &&
+                <>
+                    <ul className={s.cardsContainer}>
+                        {pagination.pageContent.map((d, i) => <BreedCard key={i} breed={d} />)}
+                    </ul>
+                    <Pagination />
+                </>
             }
-            <Pagination />
         </div>
     );
 }

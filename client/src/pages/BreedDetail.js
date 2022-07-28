@@ -11,11 +11,13 @@ import HeartIcon from "../components/Icons/Heart";
 import VariableIcon from "../components/Icons/Variable";
 import BackButton from "../components/BackButton";
 import NotFound from "../components/NotFound";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function BreedDetail() {
     const { id } = useParams();
     const dispatch = useDispatch();
     const breedDetail = useSelector(state => state.dogDetail);
+    const loading = useSelector(state => state.loading);
 
     useEffect(() => {
         dispatch(fetchDogDetail(id));
@@ -27,9 +29,9 @@ export default function BreedDetail() {
             <div className={s.backBtnContainer}>
                 <BackButton />
             </div>
-            {breedDetail.id === null ?
-                <NotFound />
-                :
+            {loading && <LoadingSpinner style={{ margin: '2rem 0' }} />}
+            {(breedDetail.id === null && !loading) && <NotFound />}
+            {(breedDetail.id !== null && !loading) &&
                 <div className={s.dogDetailContainer}>
                     <h1>{breedDetail.name}</h1>
                     <ul className={s.temperamentList}>

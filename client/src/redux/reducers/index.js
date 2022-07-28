@@ -10,11 +10,13 @@ import {
     FILTER_DOGS_ORIGIN,
     SET_PAGE,
     SET_SEARCH,
+    SET_LOADING,
 } from "../actions/constants";
 
 export const initialState = {
     dogs: [],
     filteredDogs: [],
+    loading: false,
     search: "All",
     filters: {
         temperament: 'all',
@@ -182,6 +184,11 @@ const rootReducer = (state = initialState, action) => {
                 }
             };
         }
+        case SET_LOADING:
+            return {
+                ...state,
+                loading: action.payload
+            }
         default:
             return { ...state };
     }
