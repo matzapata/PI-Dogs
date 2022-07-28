@@ -1,4 +1,18 @@
 
+.searchContainer {
+    display: flex;
+    align-items: center;
+}
+
+.searchContainer button {
+    margin-left: 1rem;
+    border: none;
+    background-color: var(--gray-50);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 .breedsContainer {
     max-width: 800px;
     margin: 0 auto;

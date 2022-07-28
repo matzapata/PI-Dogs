@@ -11,7 +11,8 @@ import s from "./Home.module.css";
 import TemperamentFilter from "../components/TemperamentFilter";
 import OriginFilter from "../components/OriginFilter";
 import NotFound from "../components/NotFound";
-import LoadingSpinner from "../components/LoadingSpinner"
+import LoadingSpinner from "../components/LoadingSpinner";
+import CloseIcon from "../components/Icons/Close";
 
 export default function Home() {
     const dispatch = useDispatch();
@@ -22,10 +23,21 @@ export default function Home() {
 
     useEffect(() => { dispatch(fetchAllDogs()); }, []);
 
+    const clearSearch = () => {
+        dispatch(fetchAllDogs());
+    };
+
     return (
         <div className={s.breedsContainer}>
             <div className={s.filterContainer}>
-                <h2>{search}</h2>
+                <div className={s.searchContainer}>
+                    <h2>{search}</h2>
+                    {search !== "All" &&
+                        <button onClick={() => { clearSearch(); }}>
+                            <CloseIcon style={{ height: "1rem" }} />
+                        </button>
+                    }
+                </div>
                 <p>{filteredDogs.length} results for search {search}</p>
                 <div style={{ marginTop: "1rem" }}>
                     <SortButtons />
@@ -33,7 +45,7 @@ export default function Home() {
                     <TemperamentFilter />
                 </div>
             </div>
-            {loading && <LoadingSpinner style={{margin: '2rem 0'}}/>}
+            {loading && <LoadingSpinner style={{ margin: '2rem 0' }} />}
             {(!loading && pagination.pageContent.length === 0) && <NotFound />}
             {(!loading && pagination.pageContent.length !== 0) &&
                 <>

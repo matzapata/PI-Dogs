@@ -11,7 +11,7 @@ export default function TemperamentFilter() {
     const temperaments = useSelector(state => state.temperaments);
     const [displayBtn, setDisplayBtn] = useState(false);
     const [filters, setFilters] = useState([]);
-    const [select, setSelect] = useState("");
+    const [select, setSelect] = useState("all");
 
     useEffect(() => {
         dispatch(fetchTemperaments());
@@ -40,12 +40,13 @@ export default function TemperamentFilter() {
         const newFilters = filters.filter(f => f !== temperament)
         setFilters(newFilters)
         dispatch(filterDogsTemperament(newFilters));
+        if (newFilters.length === 0) setSelect('all')
     }
 
     return (
         <div className={s.container}>
             <div style={{ display: "flex" }}>
-                <select className={sComponents.select} onChange={onChange}>
+                <select className={sComponents.select} onChange={onChange} value={select}>
                     <option value="all">All temperaments</option>
                     {temperaments.map((t, i) => <option key={i} value={t.name}>{t.name}</option>)}
                 </select>
