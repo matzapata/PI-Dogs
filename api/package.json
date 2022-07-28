@@ -7,7 +7,6 @@
     "start": "node index.js",
     "dev": "nodemon -L",
     "test": "jest --verbose",
-    "build": "cd ../client && npm run build && cd ../api",
     "syncDb": "node ./utils/syncDb.js"
   },
   "author": "Henry",
