@@ -45,41 +45,50 @@ export function setTemperaments(temperaments) {
 export function fetchAllDogs() {
     return async function (dispatch) {
         dispatch(setLoading(true));
-        const res = await dogApiGetAllDogs();
-        dispatch(setLoading(false));
         dispatch(setSearch("All"));
-        dispatch(setDogs(res.data));
+        try {
+            const res = await dogApiGetAllDogs();
+            dispatch(setDogs(res.data));
+        } catch (e) {
+            dispatch(setDogs([]));
+        }
+        dispatch(setLoading(false));
     };
 }
 
 export function fetchDogsName(name) {
     return async function (dispatch) {
         dispatch(setLoading(true));
-        const res = await dogApiGetDogByName(name);
-        dispatch(setLoading(false));
         dispatch(setSearch(name));
-        dispatch(setDogs(res.data));
+        try {
+            const res = await dogApiGetDogByName(name);
+            dispatch(setDogs(res.data));
+        } catch (e) {
+            dispatch(setDogs([]));
+        }
+        dispatch(setLoading(false));
     };
 }
 
 export function fetchTemperaments() {
     return async function (dispatch) {
-        const res = await dogApiGetDogTemperaments();
-        dispatch(setTemperaments(res.data.sort(function (a, b) {
-            if (a.name < b.name) { return -1; }
-            if (a.name > b.name) { return 1; }
-            return 0;
-        })));
+        try {
+            const res = await dogApiGetDogTemperaments();
+            dispatch(setTemperaments(res.data.sort(function (a, b) {
+                if (a.name < b.name) { return -1; }
+                if (a.name > b.name) { return 1; }
+                return 0;
+            })));
+        } catch (e) { }
     };
 }
 
 export function fetchDogDetail(dogId) {
     return async function (dispatch) {
+        dispatch(setLoading(true));
         try {
-            dispatch(setLoading(true));
             const response = await dogApiGetDogDetails(dogId);
             dispatch(setDogDetail(response.data));
-            dispatch(setLoading(false));
         } catch (e) {
             dispatch(setDogDetail({
                 id: null,
@@ -91,6 +100,7 @@ export function fetchDogDetail(dogId) {
                 height: null,
             }));
         }
+        dispatch(setLoading(false));
     };
 }
 
@@ -188,6 +198,6 @@ export function setLoading(loading) {
     return {
         type: SET_LOADING,
         payload: loading
-    }
+    };
 }
 
