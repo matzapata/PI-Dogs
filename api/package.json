@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "build": "",
     "dev": "nodemon -L",
     "test": "jest --verbose",
     "syncDb": "node ./utils/syncDb.js"
