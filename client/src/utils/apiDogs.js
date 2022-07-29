@@ -16,7 +16,17 @@ export function dogApiGetDogTemperaments() {
     return axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/temperaments`);
 }
 
-export function dogApiCreateNewDog(name, height, weight, lifespan, temperamentIds) {
+export function dogApiCreateNewDog(
+    name,
+    height_min,
+    height_max,
+    weight_min,
+    weight_max,
+    lifespan_min,
+    lifespan_max,
+    image,
+    temperamentIds
+) {
 
     return axios({
         method: 'post',
@@ -26,9 +36,13 @@ export function dogApiCreateNewDog(name, height, weight, lifespan, temperamentId
         },
         data: JSON.stringify({
             name,
-            height,
-            weight,
-            lifespan,
+            height_min,
+            height_max,
+            weight_min,
+            weight_max,
+            lifespan_min,
+            lifespan_max,
+            image,
             temperamentIds
         })
     });

@@ -39,12 +39,12 @@ router.get('/:breedId', async function (req, res) {
 });
 
 router.post('/', async function (req, res) {
-    const { name, height, weight, lifespan, temperamentIds } = req.body;
+    const { name, height_min, height_max, weight_min, weight_max, lifespan_min, lifespan_max, temperamentIds, image } = req.body;
 
     try {
-        if ([name, height, weight, lifespan].includes(undefined)) throw new Error("Missing parameters to create dog breed");
+        if ([name, height_min, height_max, weight_min, weight_max, lifespan_min, lifespan_max].includes(undefined)) throw new Error("Missing parameters to create dog breed");
 
-        const newBreed = await Dog.create({ name, height, weight, lifespan });
+        const newBreed = await Dog.create({ name, height_min, height_max, weight_min, weight_max, lifespan_min, lifespan_max, image});
         if (Array.isArray(temperamentIds)) {
             temperamentIds.forEach(async (tId) => {
                 const temperament = await Temperament.findByPk(tId);

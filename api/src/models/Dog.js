@@ -1,8 +1,6 @@
 const { DataTypes } = require('sequelize');
-// Exportamos una funcion que define el modelo
-// Luego le injectamos la conexion a sequelize.
+
 module.exports = (sequelize) => {
-  // defino el modelo
   sequelize.define('dog', {
     id: {
       type: DataTypes.UUID,
@@ -10,20 +8,36 @@ module.exports = (sequelize) => {
       primaryKey: true,
     },
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
-    height: {
-      type: DataTypes.STRING, // String para usar un rango. EJ: "1 - 5"
+    height_max: {
+      type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    weight: {
-      type: DataTypes.STRING, // String para usar un rango. EJ: "1 - 5"
+    height_min: {
+      type: DataTypes.SMALLINT,
+      allowNull: false,
+    },
+    weight_max: {
+      type: DataTypes.SMALLINT, 
       allowNull: false
     },
-    lifespan: {
-      type: DataTypes.STRING, // String para usar un rango. EJ: "12 - 16 years" 
+    weight_min: {
+      type: DataTypes.SMALLINT, 
+      allowNull: false
+    },
+    lifespan_max: {
+      type: DataTypes.SMALLINT, 
       allowNull: false,
+    },
+    lifespan_min: {
+      type: DataTypes.SMALLINT, 
+      allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   }, 
   {
