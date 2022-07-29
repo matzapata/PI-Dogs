@@ -134,8 +134,8 @@ describe('Reducers', () => {
     
     it("FILTER_DOGS_TEMPERAMENT should filter dogs based on temperament and update filters state", () => {
         const state = rootReducer(undefined, setDogs(data.dogs))
-        const newState = rootReducer(state, filterDogsTemperament("Stubborn"))
-        expect(newState.filters.temperament).toEqual("Stubborn")
+        const newState = rootReducer(state, filterDogsTemperament(["Stubborn"]))
+        expect(newState.filters.temperament).toEqual(["Stubborn"])
         expect(newState.filteredDogs.length).toEqual(4)
     });
 });

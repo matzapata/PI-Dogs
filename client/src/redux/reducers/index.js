@@ -19,7 +19,7 @@ export const initialState = {
     loading: false,
     search: "All",
     filters: {
-        temperament: 'all',
+        temperament: [],
         origin: 'all',
     },
     pagination: {
