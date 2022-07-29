@@ -14,3 +14,7 @@
     height: 50px;
     fill: var(--gray-900);
 }
+
+.container button {
+    padding: 0.25rem 0.5rem;
+}

@@ -23,21 +23,10 @@ export default function Home() {
 
     useEffect(() => { dispatch(fetchAllDogs()); }, []);
 
-    const clearSearch = () => {
-        dispatch(fetchAllDogs());
-    };
-
     return (
         <div className={s.breedsContainer}>
             <div className={s.filterContainer}>
-                <div className={s.searchContainer}>
-                    <h2>{search}</h2>
-                    {search !== "All" &&
-                        <button onClick={() => { clearSearch(); }}>
-                            <CloseIcon style={{ height: "1rem" }} />
-                        </button>
-                    }
-                </div>
+                <h2>{search}</h2>
                 <p>{filteredDogs.length} results for search {search}</p>
                 <div style={{ marginTop: "1rem" }}>
                     <SortButtons />

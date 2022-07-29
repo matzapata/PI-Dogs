@@ -3,12 +3,52 @@
     display: flex;
 }
 
-.formInput {
-    composes: formInput from "../styles/Components.module.css";
+.inputContainer {
+    display: flex;
+    align-items: center;
+    background-color: var(--gray-50);
+    border: 1px solid var(--gray-300);
+    color: var(--gray-900);
+    border-radius: var(--rounded);
+    padding: 0 0.75rem; 
+    width: 100%;
     margin-right: 0.25rem;
-    width: 100%;     
 }
 
-.btnSm {
-    composes: btnSm from "../styles/Components.module.css";
+.inputContainer input {
+    padding:  0.5rem 0.8rem;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+}
+
+.inputContainer input:focus {
+    border: none;
+    outline: none;
+}
+
+.inputContainer:focus-within {
+    border-color: var(--blue-500);   
+    outline: 1px solid var(--blue-500);
+}
+
+.searchIcon {
+    height: 1rem;
+    color: var(--gray-700);
+} 
+
+.closeIcon {
+    height: 1rem;
+    color: var(--gray-700);
+} 
+
+.inputContainer button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
