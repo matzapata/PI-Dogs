@@ -3,24 +3,16 @@ const router = Router();
 const { getBreeds, searchBreeds } = require('../../utils/dogApi');
 const { Dog, Temperament, Op } = require('../db');
 const checkIfValidUUID = require('../../utils/validateUUID');
+const { formatDogApi, formatDogDb, formatDogDbDetail, formatDogApiDetail } = require('../../utils/dataFormaters');
 
 router.get('/', async function (req, res) {
     const { name } = req.query;
 
     const searchPromises = [searchBreeds(name), Dog.findAll({ where: { name: { [Op.like]: `%${name}%` } }, include: Temperament })];
     const getPromises = [getBreeds(), Dog.findAll({ include: Temperament })];
-    let breeds = await Promise.all((name) ? searchPromises : getPromises);
-    breeds = [...breeds[0], ...breeds[1]];
 
-    breeds = breeds.map(b => {
-        return {
-            id: b.id,
-            name: b.name,
-            image: (b.image?.url) ? b.image?.url : "",
-            weight: (b.weight.metric) ? b.weight.metric : b.weight,
-            temperament: (b.temperaments === undefined) ? b.temperament?.replace(/\s/g, '').split(',') : b.temperaments.map(t => t.name),
-        };
-    });
+    let breeds = await Promise.all((name) ? searchPromises : getPromises);
+    breeds = [...breeds[0].map(formatDogApi), ...breeds[1].map(formatDogDb)];
 
     if (breeds.length === 0) res.status(404).send("Not found");
     else res.send(breeds);
@@ -35,25 +27,14 @@ router.get('/:breedId', async function (req, res) {
             where: { id: breedId },
             include: Temperament
         });
-        breedDetail = (breedDetail) ? breedDetail.toJSON() : null;
+        breedDetail = (breedDetail) ? formatDogDbDetail(breedDetail.toJSON()) : null;
     } else {
         const breeds = await getBreeds();
         breedDetail = breeds.find((b) => b.id === parseInt(breedId));
+        breedDetail = (breedDetail) ? formatDogApiDetail(breedDetail) : null;
     }
 
-    if (breedDetail) {
-        let b = breedDetail
-        breedDetail = {
-            id: b.id,
-            name: b.name,
-            image: (b.image?.url) ? b.image?.url : "",
-            weight: (b.weight.metric) ? b.weight.metric : b.weight,
-            temperament: (b.temperaments === undefined) ? b.temperament?.replace(/\s/g, '').split(',') : b.temperaments.map(t => t.name),
-            lifespan: (b.lifespan) ? b.lifespan : b.life_span,
-            height: (b.height.metric === undefined) ? b.height : b.height.metric
-        };
-        res.send(breedDetail);
-    }
+    if (breedDetail) res.send(breedDetail);
     else res.status(404).send("Not found");
 });
 
