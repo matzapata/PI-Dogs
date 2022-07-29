@@ -51,7 +51,7 @@ export default function BreedDetail() {
                         <DetailCard
                             icon={<HeartIcon />}
                             label="Lifespan"
-                            value={`${breedDetail.lifespan}`}
+                            value={`${breedDetail.lifespan} ${!breedDetail.lifespan.includes("years") && "years"}`}
                         />
                     </div>
                     {breedDetail.image ?
