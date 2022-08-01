@@ -4,7 +4,7 @@ import nock from "nock";
 import axios from 'axios';
 import data from "./utils/db.json";
 import { fetchAllDogs, fetchDogDetail, fetchDogsName, fetchTemperaments, filterDogsOrigin, filterDogsTemperament, nextPage, prevPage, setDogDetail, setDogs, setPage, setSearch, setTemperaments } from "../redux/actions/index";
-import { FILTER_DOGS_ORIGIN, FILTER_DOGS_TEMPERAMENT, NEXT_PAGE, PREV_PAGE, SET_DOGS, SET_DOG_DETAIL, SET_PAGE, SET_SEARCH, SET_TEMPERAMENTS } from '../redux/actions/constants';
+import { FILTER_DOGS_ORIGIN, FILTER_DOGS_TEMPERAMENT, NEXT_PAGE, PREV_PAGE, SET_DOGS, SET_DOG_DETAIL, SET_LOADING, SET_PAGE, SET_SEARCH, SET_TEMPERAMENTS } from '../redux/actions/constants';
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
 describe('Actions', () => {
@@ -44,7 +44,13 @@ describe('Actions', () => {
         nock("http://localhost:3001").get('/api/dogs').reply(200, data.dogs);
         await store.dispatch(fetchAllDogs());
         const actions = store.getActions();
-        expect(actions).toEqual([{ type: SET_SEARCH, payload: "All" }, { type: SET_DOGS, payload: data.dogs }]);
+
+        expect(actions).toEqual([
+            { type: SET_LOADING, payload: true },
+            { type: SET_SEARCH, payload: "All" },
+            { type: SET_DOGS, payload: data.dogs },
+            { type: SET_LOADING, payload: false },
+        ]);
     });
 
     it('Fetch dogs with name hound', async () => {
@@ -52,7 +58,13 @@ describe('Actions', () => {
         nock("http://localhost:3001").get('/api/dogs?name=hound').reply(200, response);
         await store.dispatch(fetchDogsName('hound'));
         const actions = store.getActions();
-        expect(actions).toEqual([{ type: SET_SEARCH, payload: "hound" }, { type: SET_DOGS, payload: response }]);
+
+        expect(actions).toEqual([
+            { type: SET_LOADING, payload: true },
+            { type: SET_SEARCH, payload: "hound" },
+            { type: SET_DOGS, payload: response },
+            { type: SET_LOADING, payload: false },
+        ]);
     });
 
     it('Fetch temperaments', async () => {
@@ -80,13 +92,24 @@ describe('Actions', () => {
         await store.dispatch(fetchDogDetail("notfound"));
 
         const actions = store.getActions();
+        console.log(actions);
         expect(actions).toEqual([
+            { type: 'SET_LOADING', payload: true },
             {
-                type: SET_DOG_DETAIL,
-                payload: dog
+                type: 'SET_DOG_DETAIL',
+                payload: {
+                    id: 1,
+                    name: 'Affenpinscher',
+                    image: 'https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg',
+                    weight: '3 - 6',
+                    temperament: 'Stubborn, Curious, Playful, Adventurous, Active, Fun-loving',
+                    origin: 'dogApi'
+                }
             },
+            { type: 'SET_LOADING', payload: false },
+            { type: 'SET_LOADING', payload: true },
             {
-                type: SET_DOG_DETAIL,
+                type: 'SET_DOG_DETAIL',
                 payload: {
                     id: null,
                     name: null,
@@ -94,9 +117,11 @@ describe('Actions', () => {
                     weight: null,
                     temperament: null,
                     lifespan: null,
-                    height: null,
+                    height: null
                 }
-            }]);
+            },
+            { type: 'SET_LOADING', payload: false },
+        ]);
     });
 
     it('Pages', () => {
@@ -119,7 +144,7 @@ describe('Actions', () => {
         const actions = store.getActions();
         expect(actions).toEqual([
             { type: FILTER_DOGS_ORIGIN, payload: 'user' },
-            { type: FILTER_DOGS_TEMPERAMENT, payload: 'temperament' }        
+            { type: FILTER_DOGS_TEMPERAMENT, payload: 'temperament' }
         ]);
     });
 

@@ -29,18 +29,24 @@ describe('Dog routes', () => {
         .post('/api/dogs')
         .send({
           name: "name",
-          height: "height",
-          weight: "weight",
-          lifespan: "lifespan",
+          height_min: 1,
+          height_max: 2,
+          weight_min: 1,
+          weight_max: 2,
+          lifespan_min: 1,
+          lifespan_max: 2,
+          image: "image",
           temperamentIds: [1, 2, 3]
         });
       const getDogs = await server.get('/api/dogs');
       const found = getDogs.body.findIndex((d) => d.id === postDog.body.id);
+      
       expect(found).not.toBe(-1);
     });
 
     it("GET /dogs?name=air Should return all dogs with 'air' in their name (dogApi Only)", async () => {
       const res = await server.get('/api/dogs?name=air');
+      
       expect(res.statusCode).toBe(200);
       expect(res.body).toHaveLength(6);
     });
@@ -50,18 +56,24 @@ describe('Dog routes', () => {
         .post('/api/dogs')
         .send({
           name: "nameairname",
-          height: "height",
-          weight: "weight",
-          lifespan: "lifespan",
+          height_min: 1,
+          height_max: 2,
+          weight_min: 1,
+          weight_max: 2,
+          lifespan_min: 1,
+          lifespan_max: 2,
+          image: "image",
           temperamentIds: [1, 2, 3]
         });
       const getDogs = await server.get('/api/dogs');
       const found = getDogs.body.findIndex((d) => d.id === postDog.body.id);
+      
       expect(found).not.toBe(-1);
     });
 
     it("GET /dog?name=notfound should respond with status 404 if couldn't find ay match", async () => {
       const res = await server.get('/api/dogs?name=notfound');
+      
       expect(res.statusCode).toBe(404);
     });
   });
@@ -70,11 +82,13 @@ describe('Dog routes', () => {
 
     it("GET /dogs/:breedId should return 404 if not found", async () => {
       const res = await server.get('/api/dogs/notfound');
+      
       expect(res.statusCode).toBe(404);
     });
 
     it("GET /dogs/:breedId (source dogApi) should respond with status 200 and only name, temperaments, image, height, weight and lifespan attributes", async () => {
       const res = await server.get('/api/dogs/5');
+
       expect(res.statusCode).toBe(200);
       expect(res.body).toHaveProperty('id');
       expect(res.body).toHaveProperty('name');
@@ -88,10 +102,14 @@ describe('Dog routes', () => {
 
     it("GET /dogs/:breedId (source user db) should respond with status 200 and only temperaments, image, name, height, weight and lifespan attributes", async () => {
       const dog = await Dog.create({
-        name: 'name',
-        height: 'height',
-        weight: 'weight',
-        lifespan: 'lifespan'
+        name: "name",
+        height_min: 1,
+        height_max: 2,
+        weight_min: 1,
+        weight_max: 2,
+        lifespan_min: 1,
+        lifespan_max: 2,
+        image: "image"
       });
       const temperament = await Temperament.findByPk(1);
       await dog.addTemperament(temperament);
@@ -115,16 +133,23 @@ describe('Dog routes', () => {
         .post('/api/dogs')
         .send({
           name: "name",
-          height: "height",
-          weight: "weight",
-          lifespan: "lifespan",
+          height_min: 1,
+          height_max: 2,
+          weight_min: 1,
+          weight_max: 2,
+          lifespan_min: 1,
+          lifespan_max: 2,
+          image: "image",
           temperamentIds: [1, 2, 3]
         });
       const getDog = await server.get(`/api/dogs/${postDog.body.id}`);
+      
       expect(getDog.body.name).toBe("name");
-      expect(getDog.body.height).toBe("height");
-      expect(getDog.body.weight).toBe("weight");
-      expect(getDog.body.lifespan).toBe("lifespan");
+      expect(getDog.body.image).toBe("image");
+      expect(getDog.body.weight).toBe("1 - 2");
+      expect(getDog.body.height).toBe("1 - 2");
+      expect(getDog.body.lifespan).toBe("1 - 2");
+      expect(getDog.body.temperament.length).toBe(3);
     });
 
     it("POST /dogs should respond with status 400 if missing info", async () => {

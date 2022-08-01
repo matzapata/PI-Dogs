@@ -1,4 +1,4 @@
-const { Dog, conn } = require('../../src/db.js');
+const { Dog, Temperament, conn } = require('../../src/db.js');
 
 describe('Dog model', () => {
   beforeAll(async () => {
@@ -22,14 +22,42 @@ describe('Dog model', () => {
       });
 
       it('should work when its a valid name', async () => {
-        const dog = await Dog.create({
-          name: "name",
-          height: "height",
-          weight: "weight",
-          lifespan: "lifespan"
+        const dog = await Dog.create({ 
+          name: "name", 
+          height_min: 1, 
+          height_max: 2, 
+          weight_min: 1, 
+          weight_max: 2, 
+          lifespan_min: 1, 
+          lifespan_max: 2, 
+          image: "image"
         });
         expect(dog).not.toBe(null);
       });
+
+      it ("Should work with temperament relationship", async () => {
+        const dog = await Dog.create({ 
+          name: "name", 
+          height_min: 1, 
+          height_max: 2, 
+          weight_min: 1, 
+          weight_max: 2, 
+          lifespan_min: 1, 
+          lifespan_max: 2, 
+          image: "image"
+        });
+        const temperament = await Temperament.findByPk(1);
+        await dog.addTemperament(temperament)
+
+        const dogs = await Dog.findOne({
+          where: {
+            name: "name"
+          },
+          include: Temperament
+        })
+        
+        expect(dogs.temperaments.length).toBe(1);
+      })
     });
   });
 });
