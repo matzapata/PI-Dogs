@@ -20,16 +20,8 @@ const defaultState = {
     lifespan_max: 0,
     image_url: "",
     temperaments: [],
-    addTemperament: null
-}
-
-export default function NewBreed() {
-    const dispatch = useDispatch();
-    const temperaments = useSelector(state => state.temperaments);
-    const [isValid, setIsValid] = useState(false);
-    const [newDog, setNewDog] = useState(null);
-    const [state, setState] = useState(defaultState);
-    const [errors, setErrors] = useState({
+    addTemperament: null,
+    errors: {
         name: '',
         height_min: '',
         height_max: '',
@@ -37,29 +29,96 @@ export default function NewBreed() {
         weight_max: '',
         lifespan_min: '',
         lifespan_max: '',
-        image_url: "",
-    });
+        image_url: '',
+    },
+    requestError: '',
+    disabled: true,
+};
+
+export default function NewBreed() {
+    const dispatch = useDispatch();
+    const temperaments = useSelector(state => state.temperaments);
+    const [newDog, setNewDog] = useState(null);
+    const [state, setState] = useState(defaultState);
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const res = await dogApiCreateNewDog(
-            state.name,
-            state.height_min,
-            state.height_max,
-            state.weight_min,
-            state.weight_max,
-            state.lifespan_min,
-            state.lifespan_max,
-            state.image_url,
-            state.temperaments.map(t => t.id)
-        );
+        try {
+            const res = await dogApiCreateNewDog(
+                state.name,
+                state.height_min,
+                state.height_max,
+                state.weight_min,
+                state.weight_max,
+                state.lifespan_min,
+                state.lifespan_max,
+                state.image_url,
+                state.temperaments.map(t => t.id)
+            );
 
-        setNewDog(res.data);
+            setNewDog(res.data);
+            window.scrollTo(0, 0);
+            setState(defaultState);
+        } catch (e) {
+            setState({
+                ...state,
+                requestError: `${e.response.status} - ${e.response.data}`
+            });
+        }
+    };
 
-        window.scrollTo(0, 0);
+    const isValid = (errors) => {
+        let errorsCount = 0;
+        for (let key of Object.keys(errors)) if (errors[key] !== '') errorsCount++;
+        return errorsCount === 0;
+    };
 
-        setState(defaultState);
+    const validateForm = (name, value) => {
+        let errorsMsg = '';
+
+        const isUrl = (str) => /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(str);
+        const isCharOnly = (str) => !/[^a-zA-Z]/.test(str);
+
+        switch (name) {
+            case "name":
+                if (value === '') errorsMsg = 'Name is required';
+                else if (!isCharOnly(value.replace(/\s/g, ''))) errorsMsg = 'Name can only contain alphabet chars';
+                else if (value.length > 100) errorsMsg = 'Name can be a maximum of 100 characters';
+                else errorsMsg = '';
+                break;
+            case "image_url":
+                errorsMsg = (value !== "" && !isUrl(value)) ? "Input is not a url" : "";
+                break;
+            case "height_min":
+                errorsMsg = (value <= 0) ? 'Min height must be greater than 0' : '';
+                break;
+            case "height_max":
+                if (value <= 0) errorsMsg = 'Max height must be greater than 0';
+                else if (value <= state.height_min) errorsMsg = 'Max height must be greater than min height';
+                else errorsMsg = '';
+                break;
+            case "weight_min":
+                errorsMsg = (value <= 0) ? 'Min weight must be greater than 0' : '';
+                break;
+            case "weight_max":
+                if (value <= 0) errorsMsg = 'Max weight must be greater than 0';
+                else if (value <= state.weight_min) errorsMsg = 'Max weight must be greater than min weight';
+                else errorsMsg = '';
+                break;
+            case "lifespan_min":
+                errorsMsg = (value <= 0) ? 'Min lifespan must be greater than 0' : '';
+                break;
+            case "lifespan_max":
+                if (value <= 0) errorsMsg = 'Max lifespan must be greater than 0';
+                else if (value <= state.lifespan_min) errorsMsg = 'Max lifespan must be greater than min lifespan';
+                else errorsMsg = '';
+                break;
+            default:
+                break;
+        }
+
+        return errorsMsg;
     };
 
     const onChange = (e) => {
@@ -90,47 +149,23 @@ export default function NewBreed() {
 
     useEffect(() => {
         // Error validations
-        const errorMsgs = { ...errors };
+        const errors = { ...state.errors };
 
-        if (state.name === '') errorMsgs.name = 'Name is required';
-        else if (/[^a-zA-Z]/.test(state.name.replace(/\s/g, ''))) errorMsgs.name = 'Name can only contain alphabet chars';
-        else if (state.name.length > 100) errorMsgs.name = 'Name can be a maximum of 100 characters';
-        else errorMsgs.name = '';
+        errors.name = validateForm('name', state.name);
+        errors.height_min = validateForm('height_min', state.height_min);
+        errors.height_max = validateForm('height_max', state.height_max);
+        errors.weight_min = validateForm('weight_min', state.weight_min);
+        errors.weight_max = validateForm('weight_max', state.weight_max);
+        errors.lifespan_min = validateForm('lifespan_min', state.lifespan_min);
+        errors.lifespan_max = validateForm('lifespan_max', state.lifespan_max);
+        errors.image_url = validateForm('image_url', state.image_url);
 
-        if (state.image_url !== "") {
-            if (!/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/.test(state.image_url)) errorMsgs.image_url = "Input is not a url";
-            else errorMsgs.image_url = "";
-        }  else errorMsgs.image_url = "";
-
-        if (state.height_min <= 0) errorMsgs.height_min = 'Min height must be greater than 0';
-        else errorMsgs.height_min = '';
-
-        if (state.height_max <= 0) errorMsgs.height_max = 'Max height must be greater than 0';
-        else if (state.height_max <= state.height_min) errorMsgs.height_max = 'Max height must be greater than min height';
-        else errorMsgs.height_max = '';
-
-        if (state.weight_min <= 0) errorMsgs.weight_min = 'Min weight must be greater than 0';
-        else errorMsgs.weight_min = '';
-
-        if (state.weight_max <= 0) errorMsgs.weight_max = 'Max weight must be greater than 0';
-        else if (state.weight_max <= state.weight_min) errorMsgs.weight_max = 'Max weight must be greater than min weight';
-        else errorMsgs.weight_max = '';
-
-        if (state.lifespan_min <= 0) errorMsgs.lifespan_min = 'Min lifespan must be greater than 0';
-        else errorMsgs.lifespan_min = '';
-
-        if (state.lifespan_max <= 0) errorMsgs.lifespan_max = 'Max lifespan must be greater than 0';
-        else if (state.lifespan_max <= state.lifespan_min) errorMsgs.lifespan_max = 'Max lifespan must be greater than min lifespan';
-        else errorMsgs.lifespan_max = '';
-
-        let errorsCount = 0;
-        for (let key of Object.keys(errorMsgs)) {
-            if (errorMsgs[key] !== '') errorsCount++;
-        }
-
-        setIsValid(errorsCount === 0);
-        setErrors(errorMsgs);
-    }, [state]);
+        setState({
+            ...state,
+            errors,
+            disabled: !isValid(errors)
+        });
+    }, [state.name, state.height_min, state.height_max, state.weight_min, state.height_max, state.lifespan_min, state.lifespan_max, state.image_url]);
 
     useEffect(() => {
         dispatch(fetchTemperaments());
@@ -152,47 +187,47 @@ export default function NewBreed() {
                 <div>
                     <label className={sComponents.formLabel}>Name</label>
                     <input className={sComponents.formInput} value={state.name} onChange={onChange} type="text" name="name" placeholder="Breed name" />
-                    <p className={s.error}>{errors.name}</p>
+                    <p className={s.error}>{state.errors.name}</p>
                 </div>
                 <div>
                     <label className={sComponents.formLabel}>Image url</label>
                     <input className={sComponents.formInput} value={state.image_url} onChange={onChange} type="text" name="image_url" placeholder="Image url (optional)" />
-                    <p className={s.error}>{errors.image_url}</p>
+                    <p className={s.error}>{state.errors.image_url}</p>
                 </div>
                 <div className={s.row}>
                     <div>
                         <label className={sComponents.formLabel}>Min height</label>
                         <input className={sComponents.formInput} value={state.height_min} onChange={onChange} type="number" name="height_min" placeholder="height_min" />
-                        <p className={s.error}>{errors.height_min}</p>
+                        <p className={s.error}>{state.errors.height_min}</p>
                     </div>
                     <div>
                         <label className={sComponents.formLabel}>Max height</label>
                         <input className={sComponents.formInput} value={state.height_max} onChange={onChange} type="number" name="height_max" placeholder="height_max" />
-                        <p className={s.error}>{errors.height_max}</p>
+                        <p className={s.error}>{state.errors.height_max}</p>
                     </div>
                 </div>
                 <div className={s.row}>
                     <div>
                         <label className={sComponents.formLabel}>Min weight</label>
                         <input className={sComponents.formInput} value={state.weight_min} onChange={onChange} type="number" name="weight_min" placeholder="weight_min" />
-                        <p className={s.error}>{errors.weight_min}</p>
+                        <p className={s.error}>{state.errors.weight_min}</p>
                     </div>
                     <div>
                         <label className={sComponents.formLabel}>Max weight</label>
                         <input className={sComponents.formInput} value={state.weight_max} onChange={onChange} type="number" name="weight_max" placeholder="weight_max" />
-                        <p className={s.error}>{errors.weight_max}</p>
+                        <p className={s.error}>{state.errors.weight_max}</p>
                     </div>
                 </div>
                 <div className={s.row}>
                     <div>
                         <label className={sComponents.formLabel}>Min lifespan</label>
                         <input className={sComponents.formInput} value={state.lifespan_min} onChange={onChange} type="number" name="lifespan_min" placeholder="lifespan_min" />
-                        <p className={s.error}>{errors.lifespan_min}</p>
+                        <p className={s.error}>{state.errors.lifespan_min}</p>
                     </div>
                     <div>
                         <label className={sComponents.formLabel}>Max lifespan</label>
                         <input className={sComponents.formInput} value={state.lifespan_max} onChange={onChange} type="number" name="lifespan_max" placeholder="lifespan_max" />
-                        <p className={s.error}>{errors.lifespan_max}</p>
+                        <p className={s.error}>{state.errors.lifespan_max}</p>
                     </div>
                 </div>
                 <div>
@@ -212,7 +247,8 @@ export default function NewBreed() {
                         )}
                     </ul>
                 </div>
-                <button disabled={!isValid} type="submit" className={sComponents.btnSm} >Save</button>
+                <button disabled={state.disabled} type="submit" className={sComponents.btnSm} >Save</button>
+                <p className={s.error} style={{ marginTop: "1rem" }}>{state.requestError}</p>
             </form>
         </div>
     );
