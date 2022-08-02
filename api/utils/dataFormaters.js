@@ -4,7 +4,7 @@ const formatDogApi = (b) => {
         id: b.id,
         name: b.name,
         image: (b.image?.url) ? b.image?.url : "",
-        weight: b.weight.metric,
+        weight: b.weight.metric.replace('NaN', '0'),
         temperament: (b.temperament === undefined) ? [] : b.temperament?.replace(/\s/g, '').split(',')
     };
 };
@@ -24,7 +24,7 @@ const formatDogApiDetail = (b) => {
         id: b.id,
         name: b.name,
         image: (b.image?.url) ? b.image?.url : "",
-        weight: b.weight.metric,
+        weight: b.weight.metric.replace('NaN', '0'),
         temperament: (b.temperament === undefined) ? [] : b.temperament?.replace(/\s/g, '').split(','),
         lifespan: b.life_span.replace(' years', ''),
         height: b.height.metric

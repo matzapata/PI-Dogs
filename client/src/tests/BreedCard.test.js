@@ -1,8 +1,8 @@
 
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import data from "./utils/db.json";
 import BreedCard from '../components/BreedCard';
-import { MemoryRouter, Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('Detail card', () => {
     it('Should render all dog details', () => {

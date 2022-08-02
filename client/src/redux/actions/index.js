@@ -149,14 +149,16 @@ export function sortDogsWeightHL() {
     return {
         type: SORT_DOGS,
         payload: function (a, b) {
+            const average = (a, b) => (a + b) / 2;
+
             const aWeights = a.weight.replace(/\s/g, '').split('-');
-            const aHWeight = (aWeights.length === 1) ? parseInt(a.weight) : parseInt(aWeights[1]);
+            const aWeight = (aWeights.length === 1) ? parseInt(a.weight) : average(parseInt(aWeights[0]), parseInt(aWeights[1]));
 
             const bWeights = b.weight.replace(/\s/g, '').split('-');
-            const bHWeight = (bWeights.length === 1) ? parseInt(b.weight) : parseInt(bWeights[1]);
+            const bWeight = (bWeights.length === 1) ? parseInt(b.weight) : average(parseInt(bWeights[0]), parseInt(bWeights[1]));
 
-            if (aHWeight < bHWeight) { return 1; }
-            if (aHWeight > bHWeight) { return -1; }
+            if (aWeight < bWeight) { return 1; }
+            if (aWeight > bWeight) { return -1; }
             return 0;
         }
     };
@@ -166,14 +168,16 @@ export function sortDogsWeightLH() {
     return {
         type: SORT_DOGS,
         payload: function (a, b) {
+            const average = (a, b) => (a + b) / 2;
+
             const aWeights = a.weight.replace(/\s/g, '').split('-');
-            const aHWeight = (aWeights.length === 1) ? parseInt(a.weight) : parseInt(aWeights[1]);
-
+            const aWeight = (aWeights.length === 1) ? parseInt(a.weight) : average(parseInt(aWeights[0]), parseInt(aWeights[1]));
+            
             const bWeights = b.weight.replace(/\s/g, '').split('-');
-            const bHWeight = (bWeights.length === 1) ? parseInt(b.weight) : parseInt(bWeights[1]);
+            const bWeight = (bWeights.length === 1) ? parseInt(b.weight) : average(parseInt(bWeights[0]), parseInt(bWeights[1]));
 
-            if (aHWeight < bHWeight) { return -1; }
-            if (aHWeight > bHWeight) { return 1; }
+            if (aWeight < bWeight) { return -1; }
+            if (aWeight > bWeight) { return 1; }
             return 0;
         }
     };
