@@ -33,6 +33,7 @@ export default function SortButtons() {
 
     return (
         <select className={s.select} onChange={onChange}>
+            <option>Order</option>
             <option name="N_AZ" value={N_AZ}>Name AZ</option>
             <option name="N_ZA" value={N_ZA}>Name ZA</option>
             <option name="W_HL" value={W_HL}>Weight HL</option>
