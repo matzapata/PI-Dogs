@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchDogDetail } from '../redux/actions';
 
@@ -12,6 +12,7 @@ import VariableIcon from "../components/Icons/Variable";
 import BackButton from "../components/BackButton";
 import NotFound from "../components/NotFound";
 import LoadingSpinner from "../components/LoadingSpinner";
+import ArrowNarrowLeft from "../components/Icons/ArrowNarrowLeft";
 
 export default function BreedDetail() {
     const { id } = useParams();
@@ -27,7 +28,11 @@ export default function BreedDetail() {
     return (
         <div className={s.container}>
             <div className={s.backBtnContainer}>
-                <BackButton />
+                {/* <BackButton /> */}
+                <Link to={"/breeds"} className={s.backBtn}>
+                    <ArrowNarrowLeft style={{ height: "1rem" }} />
+                    <span>All breeds</span>
+                </Link>
             </div>
             {loading && <LoadingSpinner style={{ margin: '2rem 0' }} />}
             {(breedDetail.id === null && !loading) && <NotFound />}

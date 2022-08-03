@@ -63,6 +63,35 @@
     margin: 1rem;
 }
 
+.backBtn {
+    color: var(--gray-500);
+    display: inline-flex;
+    justify-items: center;
+    align-items: center;
+    font-size: var(--font-sm);
+    line-height: var(--line-sm);
+    font-weight: 500;
+    background-color: white;
+    border-radius: var(--rounded);
+    border: 1px solid var(--gray-300);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.backBtn:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.backBtn:focus {
+    outline: 2px solid var(--blue-700);
+}
+
+.backBtn span {
+    margin-left: 0.5rem;
+}
+
 @media (min-width: 800px) {
     .dogDetailContainer {
         padding: 2rem;
