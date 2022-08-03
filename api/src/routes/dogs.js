@@ -8,10 +8,13 @@ const { formatDogApi, formatDogDb, formatDogDbDetail, formatDogApiDetail } = req
 router.get('/', async function (req, res) {
     const { name } = req.query;
 
-    const searchPromises = [searchBreeds(name), Dog.findAll({ where: { name: { [Op.like]: `%${name}%` } }, include: Temperament })];
-    const getPromises = [getBreeds(), Dog.findAll({ include: Temperament })];
-
-    let breeds = await Promise.all((name) ? searchPromises : getPromises);
+    let breeds = await Promise.all((name !== undefined) ?
+        // Search promises
+        [searchBreeds(name), Dog.findAll({ where: { name: { [Op.iLike]: `%${name}%` } }, include: Temperament })]
+        :
+        // Get all promises
+        [getBreeds(), Dog.findAll({ include: Temperament })]
+    );
     breeds = [...breeds[0].map(formatDogApi), ...breeds[1].map(formatDogDb)];
 
     if (breeds.length === 0) res.status(404).send("Not found");
