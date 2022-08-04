@@ -23,10 +23,8 @@ export default function TemperamentFilter() {
             setFilters([]);
             dispatch(filterDogsTemperament([]));
         }
-        else {
-            setSelect(e.target.value);
-            setDisplayBtn(true);
-        }
+        else setDisplayBtn(true);
+        setSelect(e.target.value);
     };
 
     const addFilter = () => {
@@ -40,7 +38,10 @@ export default function TemperamentFilter() {
         const newFilters = filters.filter(f => f !== temperament)
         setFilters(newFilters)
         dispatch(filterDogsTemperament(newFilters));
-        if (newFilters.length === 0) setSelect('all')
+        if (newFilters.length === 0) {
+            setSelect('all')
+            setDisplayBtn(false);
+        }
     }
 
     return (
