@@ -28,7 +28,6 @@ export default function BreedDetail() {
     return (
         <div className={s.container}>
             <div className={s.backBtnContainer}>
-                {/* <BackButton /> */}
                 <Link to={"/breeds"} className={s.backBtn}>
                     <ArrowNarrowLeft style={{ height: "1rem" }} />
                     <span>All breeds</span>

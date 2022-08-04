@@ -12,7 +12,6 @@ import TemperamentFilter from "../components/TemperamentFilter";
 import OriginFilter from "../components/OriginFilter";
 import NotFound from "../components/NotFound";
 import LoadingSpinner from "../components/LoadingSpinner";
-import CloseIcon from "../components/Icons/Close";
 
 export default function Home() {
     const dispatch = useDispatch();
