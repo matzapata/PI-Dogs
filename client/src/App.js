@@ -9,7 +9,7 @@ import s from "./App.module.css";
 
 export default function App() {
     return (
-        <Switch>
+        <>
             <Route exact path="/" component={Landing} />
             <Route path={"/breeds"} render={() =>
                 <div className={s.container}>
@@ -21,6 +21,6 @@ export default function App() {
                     </Switch>
                 </div>
             } />
-        </Switch>
+        </>
     );
 }
