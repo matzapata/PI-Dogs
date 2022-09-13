@@ -1,19 +1,19 @@
 import axios from "axios";
 
 export function dogApiGetAllDogs() {
-    return axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/dogs`);
 }
 
 export function dogApiGetDogByName(name) {
-    return axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs?name=${name}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/dogs?name=${name}`);
 }
 
 export function dogApiGetDogDetails(dogId) {
-    return axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/dogs/${dogId}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/dogs/${dogId}`);
 }
 
 export function dogApiGetDogTemperaments() {
-    return axios.get(`${process.env.REACT_APP_API_DOMAIN}/api/temperaments`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/temperaments`);
 }
 
 export function dogApiCreateNewDog(
@@ -30,7 +30,7 @@ export function dogApiCreateNewDog(
 
     return axios({
         method: 'post',
-        url: `${process.env.REACT_APP_API_DOMAIN}/api/dogs`,
+        url: `${process.env.REACT_APP_API_URL}/dogs`,
         headers: {
             'Content-Type': 'application/json'
         },

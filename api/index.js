@@ -1,35 +1,13 @@
-//                       _oo0oo_
-//                      o8888888o
-//                      88" . "88
-//                      (| -_- |)
-//                      0\  =  /0
-//                    ___/`---'\___
-//                  .' \\|     |// '.
-//                 / \\|||  :  |||// \
-//                / _||||| -:- |||||- \
-//               |   | \\\  -  /// |   |
-//               | \_|  ''\---/''  |_/ |
-//               \  .-\__  '-'  ___/-. /
-//             ___'. .'  /--.--\  `. .'___
-//          ."" '<  `.___\_<|>_/___.' >' "".
-//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-//         \  \ `_.   \_ __\ /__ _/   .-` /  /
-//     =====`-.____`.___ \_____/___.-`___.-'=====
-//                       `=---='
-//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
+const routes = require('./src/routes')
 const { conn } = require('./src/db.js');
 require('dotenv').config();
 
-const port = process.env.PORT || 3001; // Railways inyecta el PORT automaticamente 
+const port = process.env.PORT || 3001;
 
-if (process.env.NODE_ENV === 'development') {
-  // Syncing all the models at once.
-  conn.sync({ force: true }).then(async () => {
-    await require('./utils/populateTemperaments')(); // Populate temperaments db
-    server.listen(port, () => { console.log(`listening at ${port}`); });
-  });
-} else {
-  // En produccion evitamos forzar la sync
+// Syncing all the models at once.
+conn.sync({ force: true }).then(async () => {
+  await require('./utils/populateTemperaments')(); // Populate temperaments db
+  server.use('/api', routes);
   server.listen(port, () => { console.log(`listening at ${port}`); });
-}
+});
